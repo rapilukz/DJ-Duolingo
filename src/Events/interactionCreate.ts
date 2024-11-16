@@ -10,7 +10,7 @@ export const event: Event = {
       if (!command) return;
       
       try {
-        await command.run(interaction);
+        await command.run(interaction, client);
       } catch (error) {
         console.error(error);
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });

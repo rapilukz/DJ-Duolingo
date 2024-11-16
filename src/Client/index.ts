@@ -64,7 +64,6 @@ class ExtendedClient extends Client {
   public async init() {
     this.login(process.env.TOKEN); // Login to Discord
     this.InitHandlers(); // Initialize Command and Event handlers
-
   }
 }
 
