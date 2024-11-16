@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, PermissionResolvable } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import ExtendedClient from '../Client';
 
 export interface Run {

@@ -2,7 +2,7 @@ import Client from '../Client';
 import { Message, PermissionResolvable } from 'discord.js';
 
 interface Run {
-  (client: Client, message: Message, args: any[]);
+  (client: Client, message: Message, args: unknown[]);
 }
 
 export interface Command {
