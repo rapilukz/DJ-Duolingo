@@ -8,7 +8,7 @@ export interface Run {
 
 export interface SlashCommand {
   category: string;
-  data: Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+  data: SlashCommandBuilder;
   developer?: boolean;
   description: string;
   run: Run;

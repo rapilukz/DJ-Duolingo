@@ -12,6 +12,5 @@ export const command: SlashCommand = {
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
     run: async (interaction: CommandInteraction, client: ExtendedClient) => {
         interaction.reply('Pong!');
-        console.log(client)
     }
 }
