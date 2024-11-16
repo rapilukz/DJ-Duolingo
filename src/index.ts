@@ -3,12 +3,6 @@ import { GatewayIntentBits } from 'discord.js';
 
 new Client({
   intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildIntegrations,
-    GatewayIntentBits.GuildEmojisAndStickers,
-    GatewayIntentBits.DirectMessageReactions,
-    GatewayIntentBits.GuildMessageTyping,
+    GatewayIntentBits.Guilds
   ],
 }).init();

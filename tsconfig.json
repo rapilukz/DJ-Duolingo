@@ -1,7 +1,6 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "watch": true,
     "target": "esnext",
     "lib": ["ESNext"],
     "module": "commonjs",
