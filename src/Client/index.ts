@@ -24,7 +24,6 @@ class ExtendedClient extends Client {
 	public events: Collection<string, Command> = new Collection();
 	public cooldowns: Collection<string, Collection<string, number>> = new Collection();
 	public categories: Set<string> = new Set();
-	public aliases: Collection<string, Command> = new Collection();
 	public distube = new DisTube(this, {
 		plugins: [
 			new YouTubePlugin(),

@@ -7,7 +7,6 @@ interface Run {
 
 export interface Command {
   name: string;
-  aliases?: string[];
   category: string;
   cooldown: number;
   permissions?: PermissionResolvable[];
