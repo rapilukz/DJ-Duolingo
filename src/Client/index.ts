@@ -22,7 +22,6 @@ class ExtendedClient extends Client {
 	public SlashCommands: Collection<string, SlashCommand> = new Collection();
 	public SlashCommandsArray: UserApplicationCommandData[] = [];
 	public events: Collection<string, Command> = new Collection();
-	public categories: Set<string> = new Set();
 	public distube = new DisTube(this, {
 		plugins: [
 			new YouTubePlugin(),
