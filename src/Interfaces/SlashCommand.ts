@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
+import { SlashCommandOptionsOnlyBuilder } from '@discordjs/builders';
 import { CommandInteraction } from 'discord.js';
 import ExtendedClient from '../Client';
 
@@ -8,7 +8,7 @@ export interface Run {
 
 export interface SlashCommand {
   category: string;
-  data: SlashCommandBuilder;
+  data: SlashCommandOptionsOnlyBuilder;
   developer?: boolean;
   description: string;
   run: Run;
