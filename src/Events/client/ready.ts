@@ -1,5 +1,5 @@
 import { Client, ActivityType } from 'discord.js';
-import { Event } from '../Interfaces';
+import { Event } from '../../Interfaces';
 
 
 export const event: Event = {

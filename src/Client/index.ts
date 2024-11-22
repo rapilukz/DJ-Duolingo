@@ -10,8 +10,11 @@ import dotenv from 'dotenv';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 
-// Music classes
+// Distube imports
 import { DisTube } from 'distube';
+import { SpotifyPlugin } from '@distube/spotify';
+import { SoundCloudPlugin } from '@distube/soundcloud';
+import { YouTubePlugin } from '@distube/youtube';
 
 dotenv.config();
 
@@ -22,6 +25,16 @@ class ExtendedClient extends Client {
 	public cooldowns: Collection<string, Collection<string, number>> = new Collection();
 	public categories: Set<string> = new Set();
 	public aliases: Collection<string, Command> = new Collection();
+	public distube = new DisTube(this, {
+		plugins: [
+			new YouTubePlugin(),
+			new SpotifyPlugin(),
+			new SoundCloudPlugin(),
+		],
+		emitAddListWhenCreatingQueue: true,
+		emitAddSongWhenCreatingQueue: true,
+		joinNewVoiceChannel: true,
+	});
 
 	private async SlashComamndHandler() {
 		const GuildID = process.env.GUILD_ID as string;
@@ -52,7 +65,7 @@ class ExtendedClient extends Client {
 	}
 
 	private async EventHandler() {
-		const eventPath = path.join(__dirname, '..', 'events');
+		const eventPath = path.join(__dirname, '..', 'events', 'client');
 		readdirSync(eventPath).forEach(async (file) => {
 			const { event } = await import(`${eventPath}/${file}`);
 			this.events.set(event.name, event);
@@ -60,8 +73,18 @@ class ExtendedClient extends Client {
 		});
 	}
 
+	private async DistubeEventHandler() {
+		const eventPath = path.join(__dirname, '..', 'events', 'distube');
+		readdirSync(eventPath).forEach(async (file) => {
+			const { event } = await import(`${eventPath}/${file}`);
+			this.events.set(event.name, event);
+			this.on(event.name, event.run.bind(this));
+		});
+	}
+
 	private async InitHandlers() {
 		this.EventHandler();
+		this.DistubeEventHandler();
 		this.SlashComamndHandler();
 	}
 
