@@ -21,18 +21,21 @@ export const command: SlashCommand = {
 			return interaction.reply({ embeds: [embed] });
 		}
 
+		if (queue.paused) {
+			queue.resume();
+			const embed = new EmbedBuilder()
+				.setDescription('You hit the resume button, the music is now playing!')
+				.setColor(Colors.Green)
+				.setTimestamp();
+
+			return interaction.reply({ embeds: [embed] });
+		}
+
 		if (queue.playing) {
 			const embed = BaseErrorEmbed('The music is already playing!');
 			return interaction.reply({ embeds: [embed] });
 		}
 
-		queue.resume();
-		const embed = new EmbedBuilder()
-			.setDescription('You hit the pause button, and now the player is paused.')
-			.setColor(Colors.Green)
-			.setTimestamp();
-
-		return interaction.reply({ embeds: [embed] });
 
 	},
 };

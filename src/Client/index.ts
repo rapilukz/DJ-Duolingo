@@ -52,6 +52,7 @@ class ExtendedClient extends Client {
 		try {
 			console.log('Started refreshing application (/) commands.');
 
+			// Change to Routes.applicationCommands(process.env.BOT_ID as string) if you want to register global commands
 			await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
 
 			console.log('Successfully reloaded application (/) commands.');

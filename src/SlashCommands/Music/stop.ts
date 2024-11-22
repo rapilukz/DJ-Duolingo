@@ -23,6 +23,8 @@ export const command: SlashCommand = {
 		}
 
 		queue.stop();
-		queue.voice.leave();
+
+		const embed = BaseErrorEmbed('The music has been stopped!');
+		return interaction.reply({ embeds: [embed] });
 	},
 };

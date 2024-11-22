@@ -6,10 +6,10 @@ import { isVoiceChannel, BaseErrorEmbed } from '../../Utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
-	description: 'pause the current music',
+	description: 'Pauses the player',
 	data: new SlashCommandBuilder()
 		.setName('pause')
-		.setDescription('pause the current music')
+		.setDescription('Pauses the player')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
 		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
@@ -27,7 +27,7 @@ export const command: SlashCommand = {
 			return interaction.reply({ embeds: [embed] });
 		}
 
-		queue.pause();
+		queue.distube.pause(guildId);
 		const stoppedEmbed = new EmbedBuilder()
 			.setDescription('The music has been stopped!')
 			.setColor(Colors.Red);

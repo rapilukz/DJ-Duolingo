@@ -5,10 +5,10 @@ import ExtendedClient from '../../Client';
 
 export const command: SlashCommand = {
 	category: 'Music',
-	description: 'play music',
+	description: 'Play a music in your voice channel',
 	data: new SlashCommandBuilder()
 		.setName('play')
-		.setDescription('Play music')
+		.setDescription('Play a music in your voice channel')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect)
 		.addStringOption(option =>
 			option
