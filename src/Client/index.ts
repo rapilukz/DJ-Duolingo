@@ -10,6 +10,9 @@ import dotenv from 'dotenv';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 
+// Music classes
+import { DisTube } from 'distube';
+
 dotenv.config();
 
 class ExtendedClient extends Client {
@@ -19,7 +22,6 @@ class ExtendedClient extends Client {
 	public cooldowns: Collection<string, Collection<string, number>> = new Collection();
 	public categories: Set<string> = new Set();
 	public aliases: Collection<string, Command> = new Collection();
-
 
 	private async SlashComamndHandler() {
 		const GuildID = process.env.GUILD_ID as string;
