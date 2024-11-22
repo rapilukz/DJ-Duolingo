@@ -7,7 +7,6 @@ interface Run {
     (client: Client, ...args: any[]);
 }
 
-
 export interface Event{
     name: keyof ClientEvents,
     run: Run;
@@ -21,6 +20,7 @@ export interface DisTubeMetadata {
 interface DisTubeRun {
     (...args: any[]);
 }
+
 export interface DisTubeEvent {
     readonly name: Events;
     run: DisTubeRun;

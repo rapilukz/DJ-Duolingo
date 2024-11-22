@@ -9,3 +9,4 @@ new Client({
 		GatewayIntentBits.GuildIntegrations,
 	],
 }).init();
+

@@ -4,6 +4,6 @@ import { DisTubeEvent } from '../../Interfaces/Event';
 export const event: DisTubeEvent = {
 	name: Events.FFMPEG_DEBUG,
 	run: (message) => {
-		console.log(message);
+		if (process.env.DEBUG_FFMPEG === 'true') console.log(message);
 	},
 };
