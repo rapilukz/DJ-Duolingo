@@ -5,13 +5,26 @@ import { EmbedBuilder, Colors } from 'discord.js';
 export const event: DisTubeEvent = {
 	name: Events.ADD_SONG,
 	run: (queue: Queue, song: Song<DisTubeMetadata>) => {
+		const user = song.user?.username as string;
+		const botAvatar = song.metadata.interaction.client.user.displayAvatarURL() as string;
+
 		song.metadata.interaction.editReply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(Colors.Green)
-					.setTitle('Added to queue')
-					.setDescription(`Added \`${song.name}\` to the queue`),
+					.setAuthor({
+						name: 'Added to Queue 🎶',
+						iconURL: botAvatar,
+					})
+					.setTitle(`${song.name} • [${song.formattedDuration}]`)
+					.setURL(song.url as string)
+					.setDescription(`Queue Length: ${queue.songs.length}`)
+					.setFooter({
+						text: 'Added by: ' + user,
+					})
+					.setTimestamp(),
 			],
 		});
+
 	},
 };
