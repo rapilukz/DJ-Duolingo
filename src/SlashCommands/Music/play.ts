@@ -1,5 +1,5 @@
 import { SlashCommand } from '../../Interfaces';
-import { SlashCommandBuilder, EmbedBuilder } from '@discordjs/builders';
+import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, GuildMember } from 'discord.js';
 import ExtendedClient from '../../Client';
 
@@ -21,14 +21,9 @@ export const command: SlashCommand = {
 
 		if (!voiceChannel) return interaction.reply('You need to be in a voice channel to play music!');
 
-		const embed = new EmbedBuilder()
-			.setTitle('Reading your request...');
-
 		const song = interaction.options.get('song')?.value as string;
 
 		if (!song) return interaction.reply('Please provide a song to play!');
-
-		await interaction.reply({ embeds: [embed] });
 
 		await client.distube.play(voiceChannel, song, {
 			textChannel: voiceChannel,

@@ -8,7 +8,7 @@ export const event: DisTubeEvent = {
 		const user = song.user?.username as string;
 		const botAvatar = song.metadata.interaction.client.user.displayAvatarURL() as string;
 
-		song.metadata.interaction.editReply({
+		song.metadata.interaction.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(Colors.Green)
