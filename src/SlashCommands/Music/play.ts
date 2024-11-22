@@ -25,6 +25,9 @@ export const command: SlashCommand = {
 			.setTitle('Reading your request...');
 
 		const song = interaction.options.get('song')?.value as string;
+
+		if (!song) return interaction.reply('Please provide a song to play!');
+
 		await interaction.reply({ embeds: [embed] });
 
 		await client.distube.play(voiceChannel, song, {
