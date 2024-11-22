@@ -5,17 +5,17 @@ import ExtendedClient from '../../Client';
 
 export const command: SlashCommand = {
 	category: 'Music',
-	description: 'join channel',
+	description: 'leave channel',
 	data: new SlashCommandBuilder()
-		.setName('join')
-		.setDescription('join channel')
+		.setName('leave')
+		.setDescription('leave channel')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
 		const user = interaction.member as GuildMember;
 		const voiceChannel = user.voice.channel;
 		if (!voiceChannel) return interaction.reply('You need to be in a voice channel to use this command!');
 
-		client.distube.voices.join(voiceChannel);
-		interaction.reply(`Joined the voice channel! ${voiceChannel}`);
+		client.distube.voices.leave(voiceChannel);
+		interaction.reply(`Left the voice channel! ${voiceChannel}`);
 	},
 };
