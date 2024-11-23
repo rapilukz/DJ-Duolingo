@@ -4,9 +4,17 @@ import { EmbedBuilder, Colors } from 'discord.js';
 
 export const event: DisTubeEvent = {
 	name: Events.ADD_SONG,
-	run: (queue: Queue, song: Song<DisTubeMetadata>) => {
+	run: async (queue: Queue, song: Song<DisTubeMetadata>) => {
 		const user = song.user?.username as string;
 		const botAvatar = song.metadata.interaction.client.user.displayAvatarURL() as string;
+		const interaction = song.metadata.interaction;
+
+		// If the queue has only one song, don't send the message, just show the embed coming from the playSong event
+		if (queue.songs.length === 1) {
+			interaction.deferReply();
+			interaction.deleteReply();
+			return;
+		}
 
 		song.metadata.interaction.reply({
 			embeds: [
@@ -26,5 +34,6 @@ export const event: DisTubeEvent = {
 			],
 		});
 
+		return;
 	},
 };
