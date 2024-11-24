@@ -26,7 +26,7 @@ export const event: DisTubeEvent = {
 					})
 					.setTitle(`${song.name} • [${song.formattedDuration}]`)
 					.setURL(song.url as string)
-					.setDescription(`Queue Length: ${queue.songs.length}`)
+					.setDescription(`📚 Queue Length: ${queue.songs.length}`)
 					.setFooter({
 						text: 'Added by: ' + user,
 					})

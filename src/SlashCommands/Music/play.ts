@@ -25,10 +25,17 @@ export const command: SlashCommand = {
 
 		if (!song) return interaction.reply('Please provide a song to play!');
 
-		await client.distube.play(voiceChannel, song, {
-			textChannel: voiceChannel,
-			member: user,
-			metadata: { interaction },
-		});
+		try {
+			await client.distube.play(voiceChannel, song, {
+				textChannel: voiceChannel,
+				member: user,
+				metadata: { interaction },
+			});
+		}
+		catch (error) {
+			console.error(error);
+			interaction.reply('There was an error playing the song/playlist!');
+		}
+
 	},
 };
