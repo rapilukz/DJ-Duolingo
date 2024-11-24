@@ -38,6 +38,11 @@ export const event: DisTubeEvent = {
 			new ButtonBuilder().setCustomId('replay').setLabel('REPLAY').setStyle(ButtonStyle.Success),
 		);
 
-		await interaction.channel?.send({ embeds: [embed], components: [row, row2] });
+		const message = await interaction.channel?.send({ embeds: [embed], components: [row, row2] });
+
+		// Save the message id to delete it later
+		if (message) {
+			song.metadata.messageId = message.id;
+		}
 	},
 };

@@ -15,6 +15,7 @@ export interface Event{
 // Distube Interfaces
 export interface DisTubeMetadata {
     interaction: ChatInputCommandInteraction<'cached'>;
+    messageId?: string;
 }
 
 interface DisTubeRun {
