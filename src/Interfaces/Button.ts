@@ -1,3 +1,4 @@
+import { CommandInteraction } from 'discord.js';
 import Client from '../Client';
 export interface Button {
     id: string;
@@ -5,5 +6,5 @@ export interface Button {
 }
 
 interface ButtonRun {
-    (client: Client, ...args: any[]);
+    (client: Client, interaction: CommandInteraction);
 }

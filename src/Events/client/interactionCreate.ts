@@ -1,10 +1,10 @@
-import { ButtonInteraction, CommandInteraction } from 'discord.js';
+import { BaseInteraction, ButtonInteraction, CommandInteraction } from 'discord.js';
 import { Event } from '../../Interfaces';
 import ExtendedClient from '../../Client';
 
 export const event: Event = {
 	name: 'interactionCreate',
-	run: async (client: ExtendedClient, interaction: CommandInteraction) => {
+	run: async (client: ExtendedClient, interaction: BaseInteraction) => {
 		if (interaction.isCommand()) {
 			handleCommands(client, interaction);
 		}
@@ -34,7 +34,7 @@ async function handleButtons(client: ExtendedClient, interaction: ButtonInteract
 	if (!button) return;
 
 	try {
-		await button.run(client, interaction);
+		await button.run(client, interaction as unknown as CommandInteraction);
 	}
 	catch (error) {
 		console.error(error);

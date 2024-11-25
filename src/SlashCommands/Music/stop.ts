@@ -3,6 +3,8 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../Client';
 import { isVoiceChannel, BaseErrorEmbed } from '../../Utils/functions';
+import { Song } from 'distube';
+import { DisTubeMetadata } from '../../Interfaces/Event';
 
 export const command: SlashCommand = {
 	category: 'Music',
@@ -22,7 +24,13 @@ export const command: SlashCommand = {
 			return interaction.reply({ embeds: [embed] });
 		}
 
-		queue.stop();
+		client.distube.stop(guildId);
+
+		const song = queue.songs[0] as Song<DisTubeMetadata>;
+		const songMessageId = song.metadata.messageId as string;
+
+		const message = interaction.channel?.messages.fetch(songMessageId);
+		if (message) (await message).delete();
 
 		const embed = BaseErrorEmbed('The music has been stopped!');
 		return interaction.reply({ embeds: [embed] });
