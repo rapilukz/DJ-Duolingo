@@ -15,6 +15,7 @@ import { DisTube } from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
 import { SoundCloudPlugin } from '@distube/soundcloud';
 import { YouTubePlugin } from '@distube/youtube';
+import { Button } from '../Interfaces/Button';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ class ExtendedClient extends Client {
 	public SlashCommands: Collection<string, SlashCommand> = new Collection();
 	public SlashCommandsArray: UserApplicationCommandData[] = [];
 	public events: Collection<string, Command> = new Collection();
+	public buttons: Collection<string, Button> = new Collection();
 	public distube = new DisTube(this, {
 		plugins: [
 			new YouTubePlugin(),
@@ -80,10 +82,19 @@ class ExtendedClient extends Client {
 		});
 	}
 
+	private async ButtonHandler() {
+		const buttonPath = path.join(__dirname, '..', 'Buttons');
+		readdirSync(buttonPath).forEach(async (file) => {
+			const { button } = await import(`${buttonPath}/${file}`);
+			this.buttons.set(button.id, button);
+		});
+	}
+
 	private async InitHandlers() {
 		this.EventHandler();
 		this.DistubeEventHandler();
 		this.SlashComamndHandler();
+		this.ButtonHandler();
 	}
 
 	public async init() {
