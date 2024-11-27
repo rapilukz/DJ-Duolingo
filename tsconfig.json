@@ -3,11 +3,11 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["ESNext"],
-    "module": "commonjs",
+    "module": "ESNext",
     "removeComments": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "allowJs": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
