@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node-dev --respawn --transpile-only --poll ./src/index.ts --watch",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "build": "tsc"
   },
   "author": "rapilukz",
   "license": "MIT",
