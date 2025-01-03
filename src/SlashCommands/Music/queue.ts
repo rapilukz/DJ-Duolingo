@@ -1,6 +1,6 @@
 import { SlashCommand } from '../../Interfaces';
 import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
+import { CommandInteraction, PermissionFlagsBits, Colors } from 'discord.js';
 import ExtendedClient from '../../Client';
 import { isVoiceChannel, NoMusicPlayingEmbed } from '../../Utils/functions';
 
@@ -16,14 +16,14 @@ export const command: SlashCommand = {
 
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);
-		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		const embed = new EmbedBuilder()
 			.setTitle('Queue')
 			.setDescription(queue.songs.map((song, i) => {
 				return `${i === 0 ? 'Playing:' : `${i}.`} ${song.name} - \`${song.formattedDuration}\``;
 			}).join('\n'))
-			.setColor(0x00FF00)
+			.setColor(Colors.Green)
 			.setTimestamp();
 
 		interaction.reply({ embeds: [embed] });

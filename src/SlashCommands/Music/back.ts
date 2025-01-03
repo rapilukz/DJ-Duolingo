@@ -17,7 +17,7 @@ export const command: SlashCommand = {
 
 		const queue = client.distube.getQueue(guildId);
 
-		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		try {
 			const song = await client.distube.jump(guildId, -1);

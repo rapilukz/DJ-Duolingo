@@ -13,9 +13,9 @@ export function existQueue(guildId: string, client: ExtendedClient) {
 	return !queue || !queue.playing;
 }
 
-export function NoMusicPlayingEmbed() {
+export function NoMusicPlayingEmbed(interaction: CommandInteraction) {
 	const embed = BaseErrorEmbed('There is nothing playing!');
-	return embed;
+	interaction.reply({ embeds: [embed], ephemeral: true });
 }
 
 export function BaseErrorEmbed(description: string) {

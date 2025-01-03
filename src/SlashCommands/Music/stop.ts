@@ -19,7 +19,7 @@ export const command: SlashCommand = {
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);
 
-		if (!queue) return NoMusicPlayingEmbed();
+		if (!queue) return NoMusicPlayingEmbed(interaction);
 
 		client.distube.stop(guildId);
 

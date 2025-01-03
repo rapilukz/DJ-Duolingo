@@ -24,7 +24,7 @@ export const command: SlashCommand = {
 		const inputSeconds = option?.value ? Number(option.value) : 10;
 
 		const queue = client.distube.getQueue(guildId);
-		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		// Time in seconds
 		const currentTime = queue.currentTime;

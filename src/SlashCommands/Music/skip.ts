@@ -17,7 +17,7 @@ export const command: SlashCommand = {
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);
 
-		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		queue.distube.skip(guildId);
 		const stoppedEmbed = new EmbedBuilder()
