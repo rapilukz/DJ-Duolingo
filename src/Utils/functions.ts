@@ -15,3 +15,12 @@ export function BaseErrorEmbed(description: string) {
 
 	return embed;
 }
+
+export function BaseSuccessEmbed(description: string) {
+	const embed = new EmbedBuilder()
+		.setDescription(description)
+		.setColor(Colors.Green)
+		.setTimestamp();
+
+	return embed;
+}

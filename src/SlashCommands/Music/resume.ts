@@ -1,8 +1,8 @@
 import { SlashCommand } from '../../Interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, PermissionFlagsBits, EmbedBuilder, Colors } from 'discord.js';
+import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../Client';
-import { isVoiceChannel, BaseErrorEmbed } from '../../Utils/functions';
+import { isVoiceChannel, BaseErrorEmbed, BaseSuccessEmbed } from '../../Utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
@@ -23,10 +23,7 @@ export const command: SlashCommand = {
 
 		if (queue.paused) {
 			queue.resume();
-			const embed = new EmbedBuilder()
-				.setDescription('You hit the resume button, the music is now playing!')
-				.setColor(Colors.Green)
-				.setTimestamp();
+			const embed = BaseSuccessEmbed('You hit the resume button, the music is now playing!');
 
 			return interaction.reply({ embeds: [embed] });
 		}
