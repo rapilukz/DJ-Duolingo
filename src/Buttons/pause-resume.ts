@@ -4,7 +4,7 @@ import { Button } from '../Interfaces/Button';
 import Client from '../Client';
 
 export const button: Button = {
-	id: 'pause_resume',
+	id: 'pause-resume',
 	run: async (client: Client, interaction: CommandInteraction) => {
 		const queue = client.distube.getQueue(interaction.guildId as string);
 		const newInteraction = interaction as ChatInputCommandInteraction<'cached'>;

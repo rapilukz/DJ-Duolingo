@@ -25,7 +25,7 @@ export const event: DisTubeEvent = {
 		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 			new ButtonBuilder().setCustomId('queue').setLabel('QUEUE').setStyle(ButtonStyle.Success),
 			new ButtonBuilder().setCustomId('back').setLabel('BACK').setStyle(ButtonStyle.Success),
-			new ButtonBuilder().setCustomId('pause_resume').setLabel('PAUSE/RESUME').setStyle(ButtonStyle.Secondary),
+			new ButtonBuilder().setCustomId('pause-resume').setLabel('PAUSE/RESUME').setStyle(ButtonStyle.Secondary),
 			new ButtonBuilder().setCustomId('skip').setLabel('SKIP').setStyle(ButtonStyle.Success),
 			new ButtonBuilder().setCustomId('autoplay').setLabel('AUTOPLAY').setStyle(ButtonStyle.Success),
 		);
@@ -34,7 +34,7 @@ export const event: DisTubeEvent = {
 			new ButtonBuilder().setCustomId('loop').setLabel('LOOP').setStyle(ButtonStyle.Success),
 			new ButtonBuilder().setCustomId('rewind').setLabel('REWIND').setStyle(ButtonStyle.Success),
 			new ButtonBuilder().setCustomId('stop').setLabel('STOP').setStyle(ButtonStyle.Danger),
-			new ButtonBuilder().setCustomId('forward').setLabel('FORWARD').setStyle(ButtonStyle.Success),
+			new ButtonBuilder().setCustomId('fast-forward').setLabel('FORWARD').setStyle(ButtonStyle.Success),
 			new ButtonBuilder().setCustomId('replay').setLabel('REPLAY').setStyle(ButtonStyle.Success),
 		);
 
