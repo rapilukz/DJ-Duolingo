@@ -11,8 +11,8 @@ export const event: DisTubeEvent = {
 
 		// If the queue has only one song, don't send the message, just show the embed coming from the playSong event
 		if (queue.songs.length === 1) {
-			interaction.deferReply();
-			interaction.deleteReply();
+			await interaction.deferReply();
+			await interaction.deleteReply();
 			return;
 		}
 

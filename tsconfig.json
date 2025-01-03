@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "esnext",
     "lib": ["ESNext"],
-    "module": "ESNext",
+    "module": "CommonJS",
     "removeComments": true,
     "rootDir": "./src",
     "outDir": "./dist",
