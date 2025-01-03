@@ -22,7 +22,7 @@ export const command: SlashCommand = {
 		const song = queue.songs[0];
 		client.distube.seek(guildId, 0);
 
-		const embed = BaseSuccessEmbed(`Replaying: [${song.name}](${song.url})`);
+		const embed = BaseSuccessEmbed(`Replaying: [${song.name}](${song.url}) from the beginning`);
 		return interaction.reply({ embeds: [embed] });
 	},
 };
