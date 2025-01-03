@@ -2,7 +2,7 @@ import { SlashCommand } from '../../Interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../Client';
-import { isVoiceChannel, BaseErrorEmbed, BaseSuccessEmbed } from '../../Utils/functions';
+import { isVoiceChannel, BaseErrorEmbed, BaseSuccessEmbed, NoMusicPlayingEmbed } from '../../Utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
@@ -17,7 +17,7 @@ export const command: SlashCommand = {
 
 		const queue = client.distube.getQueue(guildId);
 
-		if (!queue || !queue.playing) return interaction.reply('There is nothing playing!');
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
 
 		try {
 			const song = await client.distube.jump(guildId, -1);

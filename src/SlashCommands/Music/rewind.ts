@@ -2,7 +2,7 @@ import { SlashCommand } from '../../Interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../Client';
-import { isVoiceChannel } from '../../Utils/functions';
+import { isVoiceChannel, NoMusicPlayingEmbed } from '../../Utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
@@ -24,7 +24,7 @@ export const command: SlashCommand = {
 		const inputSeconds = option?.value ? Number(option.value) : 10;
 
 		const queue = client.distube.getQueue(guildId);
-		if (!queue || !queue.playing) return interaction.reply('There is nothing playing!');
+		if (!queue || !queue.playing) return NoMusicPlayingEmbed();
 
 		// Time in seconds
 		const currentTime = queue.currentTime;

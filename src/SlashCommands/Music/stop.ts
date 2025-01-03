@@ -2,7 +2,7 @@ import { SlashCommand } from '../../Interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../Client';
-import { isVoiceChannel, BaseErrorEmbed } from '../../Utils/functions';
+import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../Utils/functions';
 import { Song } from 'distube';
 import { DisTubeMetadata } from '../../Interfaces/Event';
 
@@ -19,10 +19,7 @@ export const command: SlashCommand = {
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);
 
-		if (!queue) {
-			const embed = BaseErrorEmbed('There is nothing playing!');
-			return interaction.reply({ embeds: [embed] });
-		}
+		if (!queue) return NoMusicPlayingEmbed();
 
 		client.distube.stop(guildId);
 

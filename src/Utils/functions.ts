@@ -13,6 +13,11 @@ export function existQueue(guildId: string, client: ExtendedClient) {
 	return !queue || !queue.playing;
 }
 
+export function NoMusicPlayingEmbed() {
+	const embed = BaseErrorEmbed('There is nothing playing!');
+	return embed;
+}
+
 export function BaseErrorEmbed(description: string) {
 	const embed = new EmbedBuilder()
 		.setDescription(description)
