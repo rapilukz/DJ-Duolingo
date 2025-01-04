@@ -35,7 +35,7 @@ export const command: SlashCommand = {
 		const guildId = interaction.guildId as string;
 
 		const option = interaction.options?.get('method');
-		const method = Number(option?.value) ?? RepeatMode.SONG;
+		const method = option !== undefined ? Number(option?.value) : 1;
 
 		const queue = client.distube.getQueue(guildId);
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
