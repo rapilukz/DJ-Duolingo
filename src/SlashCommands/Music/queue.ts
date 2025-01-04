@@ -19,9 +19,9 @@ export const command: SlashCommand = {
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		const embed = new EmbedBuilder()
-			.setTitle('Queue')
+			.setTitle('🎶 Current Queue')
 			.setDescription(queue.songs.map((song, i) => {
-				return `${i === 0 ? 'Playing:' : `${i}.`} ${song.name} - \`${song.formattedDuration}\``;
+				return `${i === 0 ? '**Playing:**' : `${i}.`} ${song.name} - \`${song.formattedDuration}\``;
 			}).join('\n'))
 			.setColor(Colors.Green)
 			.setTimestamp();
