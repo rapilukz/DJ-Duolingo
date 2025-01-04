@@ -36,7 +36,6 @@ class ExtendedClient extends Client {
 	});
 
 	private async SlashComamndHandler() {
-		const GuildID = process.env.GUILD_ID as string;
 
 		const SlashcommandPath = path.join(__dirname, '..', 'SlashCommands');
 		readdirSync(SlashcommandPath).forEach((dir) => {
@@ -55,7 +54,9 @@ class ExtendedClient extends Client {
 			console.log('Started refreshing application (/) commands.');
 
 			// Change to Routes.applicationCommands(process.env.BOT_ID as string) if you want to register global commands
-			await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
+			// const GuildID = process.env.GUILD_ID as string;
+			// await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
+			await rest.put(Routes.applicationCommands(process.env.BOT_ID as string), { body: this.SlashCommandsArray });
 
 			console.log('Successfully reloaded application (/) commands.');
 		}
