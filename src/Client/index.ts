@@ -34,7 +34,7 @@ class ExtendedClient extends Client {
 		emitAddSongWhenCreatingQueue: true,
 		joinNewVoiceChannel: true,
 		ffmpeg: {
-			path: '/usr/bin/ffmpeg',
+			path: process.env.FFMPEG_PATH,
 		},
 	});
 

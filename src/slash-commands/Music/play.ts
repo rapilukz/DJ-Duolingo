@@ -34,7 +34,7 @@ export const command: SlashCommand = {
 		}
 		catch (error) {
 			console.error(error);
-			interaction.reply('There was an error playing the song/playlist!');
+			return interaction.reply('There was an error playing the song/playlist!');
 		}
 
 	},
