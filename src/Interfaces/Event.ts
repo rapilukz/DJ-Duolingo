@@ -1,4 +1,4 @@
-import Client from '../Client';
+import Client from '../client';
 import { ChatInputCommandInteraction, ClientEvents } from 'discord.js';
 import { Events } from 'distube';
 

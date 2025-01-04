@@ -1,5 +1,5 @@
 import { Events, Playlist, Queue } from 'distube';
-import { DisTubeEvent, DisTubeMetadata } from '../../Interfaces/Event';
+import { DisTubeEvent, DisTubeMetadata } from '../../interfaces/Event';
 import { EmbedBuilder, Colors } from 'discord.js';
 
 export const event: DisTubeEvent = {

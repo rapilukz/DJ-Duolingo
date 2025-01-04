@@ -1,15 +1,15 @@
-import { SlashCommand } from '../../Interfaces';
+import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
-import ExtendedClient from '../../Client';
-import { isVoiceChannel, NoMusicPlayingEmbed } from '../../Utils/functions';
+import ExtendedClient from '../../client';
+import { BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
-	description: 'Set the autoplay mode',
+	description: 'Replays the current song',
 	data: new SlashCommandBuilder()
-		.setName('autoplay')
-		.setDescription('Set the autoplay mode')
+		.setName('replay')
+		.setDescription('Replays the current song')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
 		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
@@ -19,7 +19,10 @@ export const command: SlashCommand = {
 
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
-		const autoplay = queue.toggleAutoplay();
-		interaction.reply(`Autoplay mode has been ${autoplay ? 'enabled' : 'disabled'}`);
+		const song = queue.songs[0];
+		client.distube.seek(guildId, 0);
+
+		const embed = BaseSuccessEmbed(`Replaying: [${song.name}](${song.url}) from the beginning`);
+		return interaction.reply({ embeds: [embed] });
 	},
 };

@@ -1,5 +1,5 @@
 import { DisTubeError, Events, Queue } from 'distube';
-import { DisTubeEvent } from '../../Interfaces/Event';
+import { DisTubeEvent } from '../../interfaces/Event';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Colors } from 'discord.js';
 

@@ -1,10 +1,10 @@
-import { SlashCommand } from '../../Interfaces';
+import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
-import ExtendedClient from '../../Client';
-import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../Utils/functions';
+import ExtendedClient from '../../client';
+import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
 import { Song } from 'distube';
-import { DisTubeMetadata } from '../../Interfaces/Event';
+import { DisTubeMetadata } from '../../interfaces/Event';
 
 export const command: SlashCommand = {
 	category: 'Music',

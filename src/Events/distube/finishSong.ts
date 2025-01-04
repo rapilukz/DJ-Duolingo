@@ -1,5 +1,5 @@
 import { Events, Queue, Song } from 'distube';
-import { DisTubeEvent, DisTubeMetadata } from '../../Interfaces/Event';
+import { DisTubeEvent, DisTubeMetadata } from '../../interfaces/Event';
 
 export const event: DisTubeEvent = {
 	name: Events.FINISH_SONG,

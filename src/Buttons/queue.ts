@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
-import Client from '../Client';
-import { Button } from '../Interfaces/Button';
+import Client from '../client';
+import { Button } from '../interfaces/Button';
 
 export const button: Button = {
 	id: 'queue',

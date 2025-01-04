@@ -1,7 +1,7 @@
-import { SlashCommand } from '../../Interfaces';
+import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, GuildMember } from 'discord.js';
-import ExtendedClient from '../../Client';
+import ExtendedClient from '../../client';
 
 export const command: SlashCommand = {
 	category: 'Music',

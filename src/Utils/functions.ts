@@ -1,5 +1,5 @@
 import { CommandInteraction, GuildMember, EmbedBuilder, Colors } from 'discord.js';
-import ExtendedClient from '../Client';
+import ExtendedClient from '../client';
 
 export function isVoiceChannel(interaction: CommandInteraction) {
 	const user = interaction.member as GuildMember;

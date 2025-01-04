@@ -5,7 +5,7 @@ import {
 } from 'discord.js';
 import path from 'path';
 import { readdirSync } from 'fs';
-import { Command, SlashCommand } from '../Interfaces';
+import { Command, SlashCommand } from '../interfaces';
 import dotenv from 'dotenv';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
@@ -15,7 +15,7 @@ import { DisTube } from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
 import { SoundCloudPlugin } from '@distube/soundcloud';
 import { YouTubePlugin } from '@distube/youtube';
-import { Button } from '../Interfaces/Button';
+import { Button } from '../interfaces/Button';
 
 dotenv.config();
 
@@ -33,11 +33,14 @@ class ExtendedClient extends Client {
 		emitAddListWhenCreatingQueue: true,
 		emitAddSongWhenCreatingQueue: true,
 		joinNewVoiceChannel: true,
+		ffmpeg: {
+			path: '/usr/bin/ffmpeg',
+		},
 	});
 
 	private async SlashComamndHandler() {
 
-		const SlashcommandPath = path.join(__dirname, '..', 'SlashCommands');
+		const SlashcommandPath = path.join(__dirname, '..', 'slash-commands');
 		readdirSync(SlashcommandPath).forEach((dir) => {
 			const commands = readdirSync(`${SlashcommandPath}/${dir}`).filter((file) => file.endsWith('.ts'));
 
@@ -84,7 +87,7 @@ class ExtendedClient extends Client {
 	}
 
 	private async ButtonHandler() {
-		const buttonPath = path.join(__dirname, '..', 'Buttons');
+		const buttonPath = path.join(__dirname, '..', 'buttons');
 		readdirSync(buttonPath).forEach(async (file) => {
 			const { button } = await import(`${buttonPath}/${file}`);
 			this.buttons.set(button.id, button);

@@ -1,4 +1,4 @@
-import Client from '../Client';
+import Client from '../client';
 import { Message, PermissionResolvable } from 'discord.js';
 
 interface Run {

@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, CommandInteraction } from 'discord.js';
-import { BaseErrorEmbed, BaseSuccessEmbed } from '../Utils/functions';
-import { Button } from '../Interfaces/Button';
-import Client from '../Client';
+import { BaseErrorEmbed, BaseSuccessEmbed } from '../utils/functions';
+import { Button } from '../interfaces/Button';
+import Client from '../client';
 
 export const button: Button = {
 	id: 'pause-resume',

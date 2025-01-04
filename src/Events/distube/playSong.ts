@@ -1,5 +1,5 @@
 import { Events, Queue, Song } from 'distube';
-import { DisTubeEvent, DisTubeMetadata } from '../../Interfaces/Event';
+import { DisTubeEvent, DisTubeMetadata } from '../../interfaces/Event';
 import { EmbedBuilder, Colors, userMention, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { ActionRowBuilder } from '@discordjs/builders';
 

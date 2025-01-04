@@ -1,5 +1,5 @@
 import { Events } from 'distube';
-import { DisTubeEvent } from '../../Interfaces/Event';
+import { DisTubeEvent } from '../../interfaces/Event';
 
 export const event: DisTubeEvent = {
 	name: Events.FFMPEG_DEBUG,

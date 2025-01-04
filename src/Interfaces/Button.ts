@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import Client from '../Client';
+import Client from '../client';
 export interface Button {
     id: string;
     run: ButtonRun;

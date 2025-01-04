@@ -1,6 +1,6 @@
 import { BaseInteraction, ButtonInteraction, CommandInteraction } from 'discord.js';
-import { Event } from '../../Interfaces';
-import ExtendedClient from '../../Client';
+import { Event } from '../../interfaces';
+import ExtendedClient from '../../client';
 
 export const event: Event = {
 	name: 'interactionCreate',
