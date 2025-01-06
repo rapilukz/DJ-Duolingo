@@ -30,6 +30,7 @@ class ExtendedClient extends Client {
 			new SpotifyPlugin(),
 			new SoundCloudPlugin(),
 		],
+		nsfw: true,
 		emitAddListWhenCreatingQueue: true,
 		emitAddSongWhenCreatingQueue: true,
 		joinNewVoiceChannel: true,

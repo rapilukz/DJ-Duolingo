@@ -34,7 +34,10 @@ export const command: SlashCommand = {
 		}
 		catch (error) {
 			console.error(error);
-			return interaction.reply('There was an error playing the song/playlist!');
+			await interaction.reply({
+				content: '❌ Oops! There was an error trying to play the song. Please try again or contact support if the issue persists.',
+				ephemeral: true,
+			});
 		}
 
 	},

@@ -27,10 +27,11 @@ export const command: SlashCommand = {
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
 		// Time in seconds
-		const currentTime = queue.currentTime;
-		const newTime = currentTime - inputSeconds;
+		const time = queue.currentTime - inputSeconds;
+		const rewindTime = time < 0 ? 0 : time;
 
-		client.distube.seek(guildId, newTime);
+
+		client.distube.seek(guildId, rewindTime);
 		return interaction.reply({ content: `Rewinded by ${inputSeconds} seconds!`, ephemeral: true });
 	},
 };
