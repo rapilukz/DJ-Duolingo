@@ -17,7 +17,8 @@ import { SoundCloudPlugin } from '@distube/soundcloud';
 import { YouTubePlugin } from '@distube/youtube';
 import { Button } from '../interfaces/Button';
 
-dotenv.config();
+const isDev = process.env.NODE_ENV === 'development';
+dotenv.config({ path: isDev ? '.env.dev' : '.env' });
 
 class ExtendedClient extends Client {
 	public SlashCommands: Collection<string, SlashCommand> = new Collection();
@@ -41,26 +42,30 @@ class ExtendedClient extends Client {
 
 	private async SlashComamndHandler() {
 
-		const SlashcommandPath = path.join(__dirname, '..', 'slash-commands');
-		readdirSync(SlashcommandPath).forEach((dir) => {
-			const commands = readdirSync(`${SlashcommandPath}/${dir}`).filter((file) => file.endsWith('.ts'));
+		const commandPath = path.join(__dirname, '..', 'slash-commands');
+		const dirs = readdirSync(commandPath);
+
+		for (const dir of dirs) {
+			const commands = readdirSync(`${commandPath}/${dir}`).filter((file) => file.endsWith('.ts'));
 
 			for (const file of commands) {
-				// eslint-disable-next-line @typescript-eslint/no-require-imports
-				const { command } = require(`${SlashcommandPath}/${dir}/${file}`);
+				const { command } = await import(`${commandPath}/${dir}/${file}`);
 				this.SlashCommands.set(command.data.name, command);
 				this.SlashCommandsArray.push(command.data.toJSON());
 			}
-		});
+		}
 
 		const rest = new REST({ version: '10' }).setToken(process.env.TOKEN as string);
 		try {
 			console.log('Started refreshing application (/) commands.');
 
-			// Change to Routes.applicationCommands(process.env.BOT_ID as string) if you want to register global commands
-			// const GuildID = process.env.GUILD_ID as string;
-			// await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
-			await rest.put(Routes.applicationCommands(process.env.BOT_ID as string), { body: this.SlashCommandsArray });
+			if (isDev) {
+				const GuildID = process.env.GUILD_ID as string;
+				await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
+			}
+			else {
+				await rest.put(Routes.applicationCommands(process.env.BOT_ID as string), { body: this.SlashCommandsArray });
+			}
 
 			console.log('Successfully reloaded application (/) commands.');
 		}

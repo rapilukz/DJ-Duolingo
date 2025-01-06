@@ -1,5 +1,5 @@
 node_modules
 dist
-.env
+.env*
 ## Ytdl-core is creating this files
 *-base.js
