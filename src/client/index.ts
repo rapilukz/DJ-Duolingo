@@ -28,8 +28,8 @@ class ExtendedClient extends Client {
 	public buttons: Collection<string, Button> = new Collection();
 	public distube = new DisTube(this, {
 		plugins: [
-			new YouTubePlugin(),
 			new SoundCloudPlugin(),
+			new YouTubePlugin(),
 			new SpotifyPlugin({
 				api: {
 					clientId: process.env.SPOTIFY_CLIENT_ID,
