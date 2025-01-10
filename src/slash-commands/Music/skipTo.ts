@@ -2,7 +2,7 @@ import ExtendedClient from '../../client';
 import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
-import { BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions.js';
+import { BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
