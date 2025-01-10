@@ -19,7 +19,17 @@ export const command: SlashCommand = {
 
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
+		// if there is no next song, send a message and return
+		if (!queue.songs[1]) {
+			const noNextSongEmbed = new EmbedBuilder()
+				.setDescription('There is no next song to skip to!')
+				.setColor(Colors.Red);
+
+			return interaction.reply({ embeds: [noNextSongEmbed] });
+		}
+
 		queue.distube.skip(guildId);
+
 		const stoppedEmbed = new EmbedBuilder()
 			.setDescription('The music has been skipped!')
 			.setColor(Colors.Green);
