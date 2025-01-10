@@ -1,7 +1,7 @@
 import { SlashCommand } from '../../interfaces';
 import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, Colors } from 'discord.js';
-import { isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions.js';
 import ExtendedClient from '../../client';
 
 export const command: SlashCommand = {

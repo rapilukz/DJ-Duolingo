@@ -2,7 +2,7 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../client';
-import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
+import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions.js';
 import { Song } from 'distube';
 import { DisTubeMetadata } from '../../interfaces/Event';
 
