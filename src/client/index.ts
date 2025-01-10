@@ -9,13 +9,14 @@ import { Command, SlashCommand } from '../interfaces';
 import dotenv from 'dotenv';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
+import { Button } from '../interfaces/Button';
 
 // Distube imports
 import { DisTube } from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
 import { SoundCloudPlugin } from '@distube/soundcloud';
 import { YouTubePlugin } from '@distube/youtube';
-import { Button } from '../interfaces/Button';
+import { YtDlpPlugin } from '@distube/yt-dlp';
 
 const isDev = process.env.NODE_ENV === 'development';
 dotenv.config({ path: isDev ? '.env.dev' : '.env' });
@@ -28,8 +29,16 @@ class ExtendedClient extends Client {
 	public distube = new DisTube(this, {
 		plugins: [
 			new YouTubePlugin(),
-			new SpotifyPlugin(),
 			new SoundCloudPlugin(),
+			new SpotifyPlugin({
+				api: {
+					clientId: process.env.SPOTIFY_CLIENT_ID,
+					clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+				},
+			}),
+			new YtDlpPlugin({
+				update: true,
+			}),
 		],
 		nsfw: true,
 		emitAddListWhenCreatingQueue: true,

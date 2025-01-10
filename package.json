@@ -6,9 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "start:dev": "cross-env NODE_ENV=development ts-node-dev --respawn  src/index.ts",
-    "build": "tsc",
-    "build:dev": "cross-env NODE_ENV=development tsc",
-    "start:dev:built" : "cross-env NODE_ENV=development node dist/index.js",
+    "start:dev:built": "cross-env NODE_ENV=development node dist/index.js",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
@@ -23,6 +21,7 @@
     "@distube/spotify": "^2.0.2",
     "@distube/youtube": "^1.0.4",
     "@distube/yt-dlp": "^2.0.1",
+    "@distube/ytdl": "^2.0.6",
     "@distube/ytdl-core": "^4.15.6",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
