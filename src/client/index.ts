@@ -3,7 +3,8 @@ import {
 	Collection,
 	UserApplicationCommandData,
 } from 'discord.js';
-import path from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { readdirSync } from 'fs';
 import { Command, SlashCommand } from '../interfaces';
 import dotenv from 'dotenv';
@@ -18,6 +19,10 @@ import { YouTubePlugin } from '@distube/youtube';
 import { Button } from '../interfaces/Button';
 
 const isDev = process.env.NODE_ENV === 'development';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 dotenv.config({ path: isDev ? '.env.dev' : '.env' });
 
 class ExtendedClient extends Client {
@@ -40,16 +45,18 @@ class ExtendedClient extends Client {
 		},
 	});
 
-	private async SlashComamndHandler() {
+	private async SlashCommandHandler() {
 
-		const commandPath = path.join(__dirname, '..', 'slash-commands');
+		const commandPath = join(__dirname, '..', 'slash-commands');
 		const dirs = readdirSync(commandPath);
 
 		for (const dir of dirs) {
-			const commands = readdirSync(`${commandPath}/${dir}`).filter((file) => file.endsWith('.ts'));
+			const commands = readdirSync(`${commandPath}/${dir}`).filter((file) => file.endsWith('.js'));
 
 			for (const file of commands) {
-				const { command } = await import(`${commandPath}/${dir}/${file}`);
+				const filePath = `file://${join(commandPath, dir, file)}`;
+				const { command } = await import(filePath);
+
 				this.SlashCommands.set(command.data.name, command);
 				this.SlashCommandsArray.push(command.data.toJSON());
 			}
@@ -58,13 +65,13 @@ class ExtendedClient extends Client {
 		const rest = new REST({ version: '10' }).setToken(process.env.TOKEN as string);
 		try {
 			console.log('Started refreshing application (/) commands.');
-
+			const BOT_ID = process.env.BOT_ID as string;
 			if (isDev) {
 				const GuildID = process.env.GUILD_ID as string;
-				await rest.put(Routes.applicationGuildCommands(process.env.BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
+				await rest.put(Routes.applicationGuildCommands(BOT_ID as string, GuildID), { body: this.SlashCommandsArray });
 			}
 			else {
-				await rest.put(Routes.applicationCommands(process.env.BOT_ID as string), { body: this.SlashCommandsArray });
+				await rest.put(Routes.applicationCommands(BOT_ID as string), { body: this.SlashCommandsArray });
 			}
 
 			console.log('Successfully reloaded application (/) commands.');
@@ -75,36 +82,47 @@ class ExtendedClient extends Client {
 	}
 
 	private async EventHandler() {
-		const eventPath = path.join(__dirname, '..', 'events', 'client');
-		readdirSync(eventPath).forEach(async (file) => {
-			const { event } = await import(`${eventPath}/${file}`);
+		const eventPath = join(__dirname, '..', 'events', 'client');
+		const events = readdirSync(eventPath).filter((file) => file.endsWith('.js'));
+
+		events.forEach(async (file) => {
+			const filePath = `file://${join(eventPath, file)}`;
+			const { event } = await import(filePath);
+
 			this.events.set(event.name, event);
 			this.on(event.name, event.run.bind(null, this));
 		});
 	}
 
 	private async DistubeEventHandler() {
-		const eventPath = path.join(__dirname, '..', 'events', 'distube');
-		readdirSync(eventPath).forEach(async (file) => {
-			const { event } = await import(`${eventPath}/${file}`);
+		const eventPath = join(__dirname, '..', 'events', 'distube');
+		const events = readdirSync(eventPath).filter((file) => file.endsWith('.js'));
+
+		events.forEach(async (file) => {
+			const filePath = `file://${join(eventPath, file)}`;
+			const { event } = await import(filePath);
+
 			this.events.set(event.name, event);
 			this.distube.on(event.name, event.run.bind(this));
 		});
 	}
 
 	private async ButtonHandler() {
-		const buttonPath = path.join(__dirname, '..', 'buttons');
-		readdirSync(buttonPath).forEach(async (file) => {
-			const { button } = await import(`${buttonPath}/${file}`);
+		const buttonPath = join(__dirname, '..', 'buttons');
+		const buttons = readdirSync(buttonPath).filter((file) => file.endsWith('.js'));
+
+		buttons.forEach(async (file) => {
+			const filePath = `file://${join(buttonPath, file)}`;
+			const { button } = await import(filePath);
 			this.buttons.set(button.id, button);
 		});
 	}
 
 	private async InitHandlers() {
-		this.EventHandler();
-		this.DistubeEventHandler();
-		this.SlashComamndHandler();
-		this.ButtonHandler();
+		await this.EventHandler();
+		await this.DistubeEventHandler();
+		await this.SlashCommandHandler();
+		await this.ButtonHandler();
 	}
 
 	public async init() {

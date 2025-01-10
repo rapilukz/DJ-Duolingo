@@ -2,7 +2,7 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../client';
-import { BaseErrorEmbed, BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { BaseErrorEmbed, BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions.js';
 import { RepeatMode } from 'distube';
 
 export const command: SlashCommand = {
