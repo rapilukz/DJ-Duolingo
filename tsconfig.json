@@ -1,30 +1,21 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "module": "preserve",
-    "target": "es2022",
-    "sourceMap": true,
+    "target": "esnext",
+    "lib": ["ESNext"],
+    "module": "CommonJS",
     "rootDir": "./src",
     "outDir": "./dist",
-    "strict": true,
-    "allowJs": true,
     "esModuleInterop": true,
-    "useUnknownInCatchVariables": false,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": false,
-    "allowSyntheticDefaultImports": true,
-    "preserveConstEnums": false,
-    "skipLibCheck": true,
-    "noImplicitAny": false,
     "moduleResolution": "node",
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
   },
-  "compileOnSave": true,
-  "include": [
-    "src/**/*",
-    "src/**/*.json"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

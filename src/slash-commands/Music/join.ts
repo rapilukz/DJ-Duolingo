@@ -2,7 +2,7 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, GuildMember, VoiceBasedChannel } from 'discord.js';
 import ExtendedClient from '../../client';
-import { isVoiceChannel } from '../../utils/functions.js';
+import { isVoiceChannel } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
