@@ -30,7 +30,7 @@ class ExtendedClient extends Client {
 		plugins: [
 			new SoundCloudPlugin(),
 			new YouTubePlugin({
-				cookies: this.getYTcookies(),
+				cookies: this.getYtCookies(),
 			}),
 			new SpotifyPlugin({
 				api: {
@@ -51,7 +51,7 @@ class ExtendedClient extends Client {
 		},
 	});
 
-	private getYTcookies() {
+	private getYtCookies() {
 		const cookiesPath = path.join(__dirname, '..', '..', 'yt-cookies.json');
 		try {
 			const file = readFileSync(cookiesPath);
