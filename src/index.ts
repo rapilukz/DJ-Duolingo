@@ -1,4 +1,4 @@
-import Client from './client';
+import Client from './client/index.js';
 import { GatewayIntentBits } from 'discord.js';
 
 new Client({
