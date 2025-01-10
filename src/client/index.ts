@@ -28,7 +28,6 @@ class ExtendedClient extends Client {
 	public buttons: Collection<string, Button> = new Collection();
 	public distube = new DisTube(this, {
 		plugins: [
-			new SoundCloudPlugin(),
 			new YouTubePlugin({
 				cookies: this.getYtCookies(),
 			}),
@@ -38,6 +37,7 @@ class ExtendedClient extends Client {
 					clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
 				},
 			}),
+			new SoundCloudPlugin(),
 			new YtDlpPlugin({
 				update: true,
 			}),
