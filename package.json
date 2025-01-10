@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start": "cross-env NODE_ENV=production ts-node-dev --respawn --transpile-only --poll ./src/index.ts",
     "start:dev": "cross-env NODE_ENV=development ts-node-dev --respawn  src/index.ts",
-    "start:dev:built": "cross-env NODE_ENV=development node dist/index.js",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"
   },
