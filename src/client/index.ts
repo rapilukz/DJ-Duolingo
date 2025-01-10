@@ -4,7 +4,7 @@ import {
 	UserApplicationCommandData,
 } from 'discord.js';
 import path from 'path';
-import { readdirSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 import { Command, SlashCommand } from '../interfaces';
 import dotenv from 'dotenv';
 import { REST } from '@discordjs/rest';
@@ -29,7 +29,9 @@ class ExtendedClient extends Client {
 	public distube = new DisTube(this, {
 		plugins: [
 			new SoundCloudPlugin(),
-			new YouTubePlugin(),
+			new YouTubePlugin({
+				cookies: this.getYTcookies(),
+			}),
 			new SpotifyPlugin({
 				api: {
 					clientId: process.env.SPOTIFY_CLIENT_ID,
@@ -48,6 +50,20 @@ class ExtendedClient extends Client {
 			path: process.env.FFMPEG_PATH,
 		},
 	});
+
+	private getYTcookies() {
+		const cookiesPath = path.join(__dirname, '..', '..', 'yt-cookies.json');
+		try {
+			const file = readFileSync(cookiesPath);
+			const cookies = JSON.parse(file.toString());
+
+			return cookies;
+		}
+		catch {
+			console.log('No cookies found');
+			return [];
+		}
+	}
 
 	private async SlashComamndHandler() {
 

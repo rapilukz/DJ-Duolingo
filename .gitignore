@@ -3,3 +3,4 @@ dist
 .env*
 ## Ytdl-core is creating this files
 *-base.js
+yt-cookies.json
