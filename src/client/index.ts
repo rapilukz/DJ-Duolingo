@@ -30,7 +30,7 @@ class ExtendedClient extends Client {
 		plugins: [
 			new SoundCloudPlugin(),
 			new YouTubePlugin({
-				cookies: this.getYtCookies(),
+				// cookies: this.getYtCookies(),
 			}),
 			new SpotifyPlugin({
 				api: {
