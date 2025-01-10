@@ -29,7 +29,8 @@
     "dotenv": "^16.4.5",
     "node-opus": "^0.3.3",
     "opusscript": "^0.0.8",
-    "sodium-native": "^4.3.1"
+    "sodium-native": "^4.3.1",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",

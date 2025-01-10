@@ -1,6 +1,7 @@
 import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, GuildMember } from 'discord.js';
+import logger from '../../utils/logger';
 import ExtendedClient from '../../client';
 
 export const command: SlashCommand = {
@@ -33,7 +34,7 @@ export const command: SlashCommand = {
 			});
 		}
 		catch (error) {
-			console.error(error);
+			logger.error('Failed to use /play command', { error, server: interaction.guild?.name, query: song });
 			await interaction.reply({
 				content: '❌ Oops! There was an error trying to play the song. Please try again or contact support if the issue persists.',
 				ephemeral: true,
