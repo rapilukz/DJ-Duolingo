@@ -1,6 +1,7 @@
 import { BaseInteraction, ButtonInteraction, CommandInteraction } from 'discord.js';
 import { Event } from '../../interfaces';
 import ExtendedClient from '../../client';
+import logger from '../../utils/logger';
 
 export const event: Event = {
 	name: 'interactionCreate',
@@ -24,7 +25,7 @@ async function handleCommands(client: ExtendedClient, interaction: CommandIntera
 		await command.run(interaction, client);
 	}
 	catch (error) {
-		console.error(error);
+		logger.error('Error while executing command:', { error, commandName: interaction.commandName });
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 }
@@ -37,7 +38,7 @@ async function handleButtons(client: ExtendedClient, interaction: ButtonInteract
 		await button.run(client, interaction as unknown as CommandInteraction);
 	}
 	catch (error) {
-		console.error(error);
+		logger.error('Error while executing button:', { error, buttoId: interaction.customId });
 		await interaction.reply({ content: 'There was an error while executing this button!', ephemeral: true });
 	}
 }
