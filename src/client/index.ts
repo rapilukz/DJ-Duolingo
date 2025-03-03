@@ -51,7 +51,7 @@ class ExtendedClient extends Client {
 		},
 	});
 
-	private getYtCookies() {
+	public getYtCookies() {
 		const cookiesPath = path.join(__dirname, '..', '..', 'yt-cookies.json');
 		try {
 			const file = readFileSync(cookiesPath);
@@ -65,7 +65,7 @@ class ExtendedClient extends Client {
 		}
 	}
 
-	private async SlashComamndHandler() {
+	public async SlashComamndHandler() {
 
 		const commandPath = path.join(__dirname, '..', 'slash-commands');
 		const dirs = readdirSync(commandPath);
@@ -99,7 +99,7 @@ class ExtendedClient extends Client {
 		}
 	}
 
-	private async EventHandler() {
+	public async EventHandler() {
 		const eventPath = path.join(__dirname, '..', 'events', 'client');
 		readdirSync(eventPath).forEach(async (file) => {
 			const { event } = await import(`${eventPath}/${file}`);
@@ -108,7 +108,7 @@ class ExtendedClient extends Client {
 		});
 	}
 
-	private async DistubeEventHandler() {
+	public async DistubeEventHandler() {
 		const eventPath = path.join(__dirname, '..', 'events', 'distube');
 		readdirSync(eventPath).forEach(async (file) => {
 			const { event } = await import(`${eventPath}/${file}`);
@@ -117,7 +117,7 @@ class ExtendedClient extends Client {
 		});
 	}
 
-	private async ButtonHandler() {
+	public async ButtonHandler() {
 		const buttonPath = path.join(__dirname, '..', 'buttons');
 		readdirSync(buttonPath).forEach(async (file) => {
 			const { button } = await import(`${buttonPath}/${file}`);
@@ -125,7 +125,7 @@ class ExtendedClient extends Client {
 		});
 	}
 
-	private async InitHandlers() {
+	public async InitHandlers() {
 		this.EventHandler();
 		this.DistubeEventHandler();
 		this.SlashComamndHandler();

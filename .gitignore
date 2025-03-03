@@ -5,3 +5,4 @@ dist
 *-base.js
 yt-cookies.json
 logs/*
+coverage
