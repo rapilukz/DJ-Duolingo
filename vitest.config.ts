@@ -7,6 +7,7 @@ export default defineConfig({
 			provider: 'v8',
 			reporter: ['cobertura', 'text'],
 		},
+		silent: true,
 		outputFile: 'coverage/junit.xml',
 		reporters: ['default', 'junit'],
 		setupFiles: ['./__tests__/mocks/setupMocks.ts'],
