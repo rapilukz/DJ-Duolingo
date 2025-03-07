@@ -65,8 +65,7 @@ class ExtendedClient extends Client {
 		}
 	}
 
-	public async SlashComamndHandler() {
-
+	public async readSlashCommandsFromFiles() {
 		const commandPath = path.join(__dirname, '..', 'slash-commands');
 		const dirs = readdirSync(commandPath);
 
@@ -79,9 +78,14 @@ class ExtendedClient extends Client {
 				this.SlashCommandsArray.push(command.data.toJSON());
 			}
 		}
+	}
 
-		const rest = new REST({ version: '10' }).setToken(process.env.TOKEN as string);
+	public async SlashCommandHandler() {
 		try {
+			// Reading commands from files
+			await this.readSlashCommandsFromFiles();
+
+			const rest = new REST({ version: '10' }).setToken(process.env.TOKEN as string);
 			console.log('Started refreshing application (/) commands.');
 
 			if (isDev) {
@@ -128,7 +132,7 @@ class ExtendedClient extends Client {
 	public async InitHandlers() {
 		this.EventHandler();
 		this.DistubeEventHandler();
-		this.SlashComamndHandler();
+		this.SlashCommandHandler();
 		this.ButtonHandler();
 	}
 

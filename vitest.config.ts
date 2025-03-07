@@ -8,6 +8,6 @@ export default defineConfig({
 		},
 		outputFile: 'coverage/junit.xml',
 		reporters: ['default', 'junit'],
-		setupFiles: ['./__tests__/mocks/setupTests.ts'],
+		setupFiles: ['./__tests__/mocks/setupMocks.ts'],
 	},
 });
