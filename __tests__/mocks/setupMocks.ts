@@ -36,6 +36,7 @@ vi.mock('distube', async () => {
 			getQueue = vi.fn().mockReturnValue(undefined);
 			voices = {
 				join: vi.fn(),
+				leave: vi.fn(),
 			};
 		},
 	};

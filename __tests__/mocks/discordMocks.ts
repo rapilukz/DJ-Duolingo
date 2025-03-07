@@ -9,6 +9,7 @@ const mockVoiceChannel = {
 const mockInteraction = {
 	reply: vi.fn(),
 	member: {},
+	guildId: '111111111',
 } as unknown as CommandInteraction;
 
 const mockMember = {
