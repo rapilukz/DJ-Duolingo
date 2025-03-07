@@ -33,6 +33,10 @@ vi.mock('distube', async () => {
 		...actual,
 		DisTube: class {
 			on = vi.fn();
+			getQueue = vi.fn().mockReturnValue(undefined);
+			voices = {
+				join: vi.fn(),
+			};
 		},
 	};
 });

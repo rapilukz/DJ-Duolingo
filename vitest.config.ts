@@ -1,3 +1,4 @@
+import path from 'path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -9,5 +10,11 @@ export default defineConfig({
 		outputFile: 'coverage/junit.xml',
 		reporters: ['default', 'junit'],
 		setupFiles: ['./__tests__/mocks/setupMocks.ts'],
+	},
+
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, 'src'),
+		},
 	},
 });

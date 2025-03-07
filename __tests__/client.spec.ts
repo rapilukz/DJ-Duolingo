@@ -1,6 +1,6 @@
 import { it, expect, describe, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'fs';
-import ExtendedClient from '../src/client';
+import ExtendedClient from '@/client';
 
 describe('ExtendedClient', () => {
 	let client: ExtendedClient;
