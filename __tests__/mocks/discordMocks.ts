@@ -1,5 +1,6 @@
 import { vi } from 'vitest';
-import { VoiceBasedChannel, CommandInteraction, GuildMember } from 'discord.js';
+import { VoiceBasedChannel, CommandInteraction, GuildMember, Colors } from 'discord.js';
+import { EmbedBuilder } from '@discordjs/builders';
 
 const mockVoiceChannel = {
 	id: '123456789',
@@ -18,8 +19,15 @@ const mockMember = {
 	},
 } as unknown as GuildMember;
 
+
+const noMusicPlayingMockEmbed = new EmbedBuilder()
+	.setDescription('There is nothing playing!')
+	.setColor(Colors.Red)
+	.setTimestamp();
+
 export {
 	mockVoiceChannel,
 	mockInteraction,
 	mockMember,
+	noMusicPlayingMockEmbed,
 };
