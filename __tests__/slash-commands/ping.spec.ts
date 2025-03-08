@@ -4,7 +4,7 @@ import { command } from '@/slash-commands/Utils/ping';
 import { PermissionFlagsBits } from 'discord.js';
 import { mockInteraction } from '../mocks/discordMocks';
 
-describe('Leave', () => {
+describe('Ping', () => {
 	let client: ExtendedClient;
 
 	beforeEach(() => {
