@@ -57,8 +57,7 @@ vi.mock('../../src/utils/functions', async () => {
 		BaseErrorEmbed: vi.fn((description: string) => {
 			return new EmbedBuilder()
 				.setDescription(description)
-				.setColor(Colors.Red)
-				.setTimestamp();
+				.setColor(Colors.Red);
 		}),
 		NoMusicPlayingEmbed: vi.fn((interaction: CommandInteraction) => {
 			// Mock the actual embed that would be returned

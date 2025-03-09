@@ -2,6 +2,7 @@ import { BaseInteraction, ButtonInteraction, CommandInteraction } from 'discord.
 import { Event } from '../../interfaces';
 import ExtendedClient from '../../client';
 import logger from '../../utils/logger';
+import { isVoiceChannel } from '../../utils/functions';
 
 export const event: Event = {
 	name: 'interactionCreate',
@@ -20,6 +21,10 @@ async function handleCommands(client: ExtendedClient, interaction: CommandIntera
 	if (!interaction.guild) return interaction.reply('This command can only be used in a server');
 	const command = client.SlashCommands.get(interaction.commandName);
 	if (!command) return;
+
+	if (command.needsVoiceChannel && !isVoiceChannel(interaction)) {
+		return interaction.reply('You need to be in a voice channel to use this command!');
+	}
 
 	try {
 		await command.run(interaction, client);

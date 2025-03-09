@@ -1,7 +1,7 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
 import { command } from '@/slash-commands/Music/resume';
-import { CommandInteraction, GuildMember, PermissionFlagsBits } from 'discord.js';
+import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import { mockInteraction, MockQueueOptions, mockMember, noMusicPlayingMockEmbed, createMockQueue } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
@@ -27,33 +27,13 @@ describe('Resume', () => {
 		expect(command.category).toBe('Music');
 		expect(command.description).toBe('resumes the music');
 		expect(command.data.name).toBe('resume');
+		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(
 			premmisions.toString(),
 		);
 	});
 
-	it('should not resume if user is not inside a channel', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(false);
-
-		const member = {
-			voice: {},
-		} as unknown as GuildMember;
-
-		const interaction = {
-			...mockInteraction,
-			member: member,
-		} as CommandInteraction;
-
-		await command.run(interaction, client);
-
-		expect(interaction.reply).toHaveBeenCalledWith(
-			'You need to be in a voice channel to use this command!',
-		);
-	});
-
 	it('should not resume if there is no queue', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		const interaction = {
 			...mockInteraction,
 			member: mockMember,
@@ -67,8 +47,6 @@ describe('Resume', () => {
 	});
 
 	it('should resume the music if it is paused', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		mockQueueOptions.paused = true;
 
 		const interaction = {

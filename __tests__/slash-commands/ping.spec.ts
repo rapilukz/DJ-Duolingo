@@ -18,6 +18,7 @@ describe('Ping', () => {
 		expect(command.category).toBe('Util');
 		expect(command.description).toBe('Ping the bot');
 		expect(command.data.name).toBe('ping');
+		expect(command.needsVoiceChannel).toBe(false);
 		expect(command.data.default_member_permissions).toBe(
 			premmisions.toString(),
 		);

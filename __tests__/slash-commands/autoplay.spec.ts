@@ -1,7 +1,7 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
 import { command } from '@/slash-commands/Music/autoplay';
-import { CommandInteraction, GuildMember, PermissionFlagsBits } from 'discord.js';
+import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import { mockInteraction, mockMember, noMusicPlayingMockEmbed, createMockQueue, MockQueueOptions } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
@@ -27,33 +27,13 @@ describe('Autoplay', () => {
 		expect(command.category).toBe('Music');
 		expect(command.description).toBe('Set the autoplay mode');
 		expect(command.data.name).toBe('autoplay');
+		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(
 			premmisions.toString(),
 		);
 	});
 
-	it('should not set autoplay if user is not inside a channel', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(false);
-
-		const member = {
-			voice: {},
-		} as unknown as GuildMember;
-
-		const interaction = {
-			...mockInteraction,
-			member: member,
-		} as CommandInteraction;
-
-		await command.run(interaction, client);
-
-		expect(interaction.reply).toHaveBeenCalledWith(
-			'You need to be in a voice channel to use this command!',
-		);
-	});
-
 	it('should not set autoplay if no music is playing', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		const interaction = {
 			...mockInteraction,
 			member: mockMember,
@@ -72,8 +52,6 @@ describe('Autoplay', () => {
 	});
 
 	it('should set autoplay on if music is playing', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		mockQueueOptions.playing = true;
 		mockQueueOptions.toggleAutoplay = true;
 
@@ -93,8 +71,6 @@ describe('Autoplay', () => {
 	});
 
 	it('should set autoplay off if music is playing and autoplay is on', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		mockQueueOptions.playing = true;
 		mockQueueOptions.toggleAutoplay = false;
 

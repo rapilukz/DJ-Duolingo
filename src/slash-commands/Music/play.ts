@@ -1,12 +1,13 @@
 import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, PermissionFlagsBits, GuildMember } from 'discord.js';
+import { CommandInteraction, PermissionFlagsBits, GuildMember, VoiceChannel } from 'discord.js';
 import logger from '../../utils/logger';
 import ExtendedClient from '../../client';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'Play a music in your voice channel',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('play')
 		.setDescription('Play a music in your voice channel')
@@ -18,9 +19,7 @@ export const command: SlashCommand = {
 				.setRequired(true)),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
 		const user = interaction.member as GuildMember;
-		const voiceChannel = user.voice.channel;
-
-		if (!voiceChannel) return interaction.reply('You need to be in a voice channel to play music!');
+		const voiceChannel = user.voice.channel as VoiceChannel;
 
 		const song = interaction.options.get('song')?.value as string;
 

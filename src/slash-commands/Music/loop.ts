@@ -2,12 +2,13 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../client';
-import { BaseErrorEmbed, BaseSuccessEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { BaseErrorEmbed, BaseSuccessEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
 import { RepeatMode } from 'distube';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'Toggle looping the current playing song',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('loop')
 		.setDescription('Toggle looping the current playing song')
@@ -31,7 +32,6 @@ export const command: SlashCommand = {
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
-		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
 		const guildId = interaction.guildId as string;
 
 		const option = interaction.options?.get('method');

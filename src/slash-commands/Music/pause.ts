@@ -2,17 +2,17 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, EmbedBuilder, Colors } from 'discord.js';
 import ExtendedClient from '../../client';
-import { isVoiceChannel, BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
+import { BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'Pauses the player',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('pause')
 		.setDescription('Pauses the player')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
-		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
 
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);

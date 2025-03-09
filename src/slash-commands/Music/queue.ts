@@ -1,19 +1,18 @@
 import { SlashCommand } from '../../interfaces';
 import { EmbedBuilder, SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits, Colors } from 'discord.js';
-import { isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { NoMusicPlayingEmbed } from '../../utils/functions';
 import ExtendedClient from '../../client';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'See the current queue',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('queue')
 		.setDescription('See the current queue')
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
-		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
-
 		const guildId = interaction.guildId as string;
 		const queue = client.distube.getQueue(guildId);
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
