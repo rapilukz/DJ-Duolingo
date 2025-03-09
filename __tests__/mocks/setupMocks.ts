@@ -57,7 +57,8 @@ vi.mock('../../src/utils/functions', async () => {
 		BaseErrorEmbed: vi.fn((description: string) => {
 			return new EmbedBuilder()
 				.setDescription(description)
-				.setColor(Colors.Red);
+				.setColor(Colors.Red)
+				.setTimestamp();
 		}),
 		NoMusicPlayingEmbed: vi.fn((interaction: CommandInteraction) => {
 			// Mock the actual embed that would be returned
@@ -73,8 +74,12 @@ beforeEach(() => {
 	vi.stubEnv('SPOTIFY_CLIENT_ID', 'mock-spotify-id');
 	vi.stubEnv('SPOTIFY_CLIENT_SECRET', 'mock-spotify-secret');
 	vi.stubEnv('FFMPEG_PATH', '/mock/path/to/ffmpeg');
+
+	vi.useFakeTimers();
+	vi.setSystemTime(new Date('2022-01-01T00:00:00.000Z'));
 });
 
 afterEach(() => {
 	vi.restoreAllMocks();
+	vi.useRealTimers();
 });

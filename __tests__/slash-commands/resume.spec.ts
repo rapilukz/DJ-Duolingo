@@ -65,8 +65,6 @@ describe('Resume', () => {
 	});
 
 	it('should not resume the music if it is already playing', async () => {
-		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
-
 		mockQueueOptions.playing = true;
 
 		const interaction = {
