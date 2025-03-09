@@ -29,7 +29,5 @@ export const command: SlashCommand = {
 			const embed = BaseErrorEmbed('The music is already playing!');
 			return interaction.reply({ embeds: [embed] });
 		}
-
-
 	},
 };
