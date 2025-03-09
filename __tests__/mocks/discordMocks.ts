@@ -1,13 +1,17 @@
 import { vi } from 'vitest';
-import { VoiceBasedChannel, CommandInteraction, GuildMember, Colors } from 'discord.js';
+import { VoiceBasedChannel, CommandInteraction, GuildMember, Colors, Message } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
 import { Queue } from 'distube';
+
+const mockMessage = {
+	delete: vi.fn(),
+	id: '123456789',
+} as unknown as Message;
 
 const mockVoiceChannel = {
 	id: '123456789',
 	name: 'General Voice',
 } as VoiceBasedChannel;
-
 
 const mockMember = {
 	voice: {
@@ -19,6 +23,11 @@ const mockInteraction = {
 	reply: vi.fn(),
 	member: mockMember,
 	guildId: '111111111',
+	channel: {
+		messages: {
+			fetch: vi.fn(),
+		},
+	},
 } as unknown as CommandInteraction;
 
 export interface MockQueueOptions {
@@ -37,7 +46,15 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		distube: {
 			pause: vi.fn(),
 			resume: vi.fn(),
+			stop: vi.fn(),
 		},
+		songs: [
+			{
+				metadata: {
+					messageId: mockMessage.id,
+				},
+			},
+		],
 	} as unknown as Queue;
 }
 
@@ -50,6 +67,7 @@ export {
 	mockVoiceChannel,
 	mockInteraction,
 	mockMember,
+	mockMessage,
 	noMusicPlayingMockEmbed,
 	createMockQueue,
 };
