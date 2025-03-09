@@ -1,17 +1,16 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
-import { command } from '@/slash-commands/Music/autoplay';
+import { command } from '@/slash-commands/Music/resume';
 import { CommandInteraction, GuildMember, PermissionFlagsBits } from 'discord.js';
-import { mockInteraction, mockMember, noMusicPlayingMockEmbed, createMockQueue, MockQueueOptions } from '../mocks/discordMocks';
+import { mockInteraction, MockQueueOptions, mockMember, noMusicPlayingMockEmbed, createMockQueue } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
-describe('Autoplay', () => {
+describe('resume', () => {
 	let client: ExtendedClient;
 	let mockQueueOptions: MockQueueOptions;
 
 	beforeEach(() => {
 		client = new ExtendedClient({ intents: [] });
-
 		mockQueueOptions = {
 			playing: false,
 			toggleAutoplay: false,
@@ -25,14 +24,14 @@ describe('Autoplay', () => {
 
 	it('should have the correct command data', () => {
 		expect(command.category).toBe('Music');
-		expect(command.description).toBe('Set the autoplay mode');
-		expect(command.data.name).toBe('autoplay');
+		expect(command.description).toBe('resumes the music');
+		expect(command.data.name).toBe('resume');
 		expect(command.data.default_member_permissions).toBe(
 			premmisions.toString(),
 		);
 	});
 
-	it('should not set autoplay if user is not inside a channel', async () => {
+	it('should not resume if user is not inside a channel', async () => {
 		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(false);
 
 		const member = {
@@ -51,7 +50,7 @@ describe('Autoplay', () => {
 		);
 	});
 
-	it('should not set autoplay if no music is playing', async () => {
+	it('should not resume if there is no queue', async () => {
 		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
 
 		const interaction = {
@@ -59,23 +58,17 @@ describe('Autoplay', () => {
 			member: mockMember,
 		} as CommandInteraction;
 
-		const mockQueue = createMockQueue(mockQueueOptions);
-
-		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
+		client.distube.getQueue = vi.fn().mockReturnValue(null);
 
 		await command.run(interaction, client);
 
-
-		expect(utils.NoMusicPlayingEmbed).toHaveBeenCalledWith(interaction);
 		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [noMusicPlayingMockEmbed], ephemeral: true });
-
 	});
 
-	it('should set autoplay on if music is playing', async () => {
+	it('should resume the music if it is paused', async () => {
 		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
 
-		mockQueueOptions.playing = true;
-		mockQueueOptions.toggleAutoplay = true;
+		mockQueueOptions.paused = true;
 
 		const interaction = {
 			...mockInteraction,
@@ -88,15 +81,14 @@ describe('Autoplay', () => {
 
 		await command.run(interaction, client);
 
-		expect(mockQueue.toggleAutoplay).toHaveBeenCalled();
-		expect(interaction.reply).toHaveBeenCalledWith('Autoplay mode has been enabled');
+		expect(mockQueue.resume).toHaveBeenCalled();
+		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseSuccessEmbed('You hit the resume button, the music is now playing!')] });
 	});
 
-	it('should set autoplay off if music is playing and autoplay is on', async () => {
+	it('should not resume the music if it is already playing', async () => {
 		vi.spyOn(utils, 'isVoiceChannel').mockReturnValue(true);
 
 		mockQueueOptions.playing = true;
-		mockQueueOptions.toggleAutoplay = false;
 
 		const interaction = {
 			...mockInteraction,
@@ -104,12 +96,10 @@ describe('Autoplay', () => {
 		} as CommandInteraction;
 
 		const mockQueue = createMockQueue(mockQueueOptions);
-
 		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
 
 		await command.run(interaction, client);
 
-		expect(mockQueue.toggleAutoplay).toHaveBeenCalled();
-		expect(interaction.reply).toHaveBeenCalledWith('Autoplay mode has been disabled');
+		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseErrorEmbed('The music is already playing!')] });
 	});
 });

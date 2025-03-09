@@ -1,4 +1,4 @@
-import { EmbedBuilder, Colors, CommandInteraction } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import { vi, afterEach, beforeEach } from 'vitest';
 import { noMusicPlayingMockEmbed } from './discordMocks';
 
@@ -43,6 +43,8 @@ vi.mock('distube', async () => {
 		},
 		Queue: class {
 			toggleAutoplay = vi.fn();
+			resume = vi.fn();
+			pause = vi.fn();
 		},
 	};
 });
@@ -52,12 +54,6 @@ vi.mock('../../src/utils/functions', async () => {
 	return {
 		...actual,
 
-		BaseErrorEmbed: vi.fn((description: string) => {
-			return new EmbedBuilder()
-				.setDescription(description)
-				.setColor(Colors.Red)
-				.setTimestamp();
-		}),
 		NoMusicPlayingEmbed: vi.fn((interaction: CommandInteraction) => {
 			// Mock the actual embed that would be returned
 			interaction.reply({ embeds: [noMusicPlayingMockEmbed], ephemeral: true });

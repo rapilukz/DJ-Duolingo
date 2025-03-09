@@ -1,6 +1,7 @@
 import { vi } from 'vitest';
 import { VoiceBasedChannel, CommandInteraction, GuildMember, Colors } from 'discord.js';
 import { EmbedBuilder } from '@discordjs/builders';
+import { Queue } from 'distube';
 
 const mockVoiceChannel = {
 	id: '123456789',
@@ -20,6 +21,22 @@ const mockMember = {
 } as unknown as GuildMember;
 
 
+export interface MockQueueOptions {
+	playing?: boolean;
+	toggleAutoplay?: boolean;
+	paused?: boolean;
+}
+
+function createMockQueue(options: MockQueueOptions) : Queue {
+	return {
+		playing: options.playing || false,
+		toggleAutoplay: vi.fn().mockReturnValue(options.toggleAutoplay || false),
+		resume: vi.fn(),
+		paused: options.paused || false,
+	} as unknown as Queue;
+}
+
+
 const noMusicPlayingMockEmbed = new EmbedBuilder()
 	.setDescription('There is nothing playing!')
 	.setColor(Colors.Red)
@@ -30,4 +47,5 @@ export {
 	mockInteraction,
 	mockMember,
 	noMusicPlayingMockEmbed,
+	createMockQueue,
 };
