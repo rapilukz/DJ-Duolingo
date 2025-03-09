@@ -20,7 +20,6 @@ const mockMember = {
 	},
 } as unknown as GuildMember;
 
-
 export interface MockQueueOptions {
 	playing?: boolean;
 	toggleAutoplay?: boolean;
@@ -35,7 +34,6 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		paused: options.paused || false,
 	} as unknown as Queue;
 }
-
 
 const noMusicPlayingMockEmbed = new EmbedBuilder()
 	.setDescription('There is nothing playing!')

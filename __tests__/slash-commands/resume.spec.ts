@@ -5,12 +5,13 @@ import { CommandInteraction, GuildMember, PermissionFlagsBits } from 'discord.js
 import { mockInteraction, MockQueueOptions, mockMember, noMusicPlayingMockEmbed, createMockQueue } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
-describe('resume', () => {
+describe('Resume', () => {
 	let client: ExtendedClient;
 	let mockQueueOptions: MockQueueOptions;
 
 	beforeEach(() => {
 		client = new ExtendedClient({ intents: [] });
+
 		mockQueueOptions = {
 			playing: false,
 			toggleAutoplay: false,
