@@ -12,7 +12,7 @@ describe('Ping', () => {
 		vi.clearAllMocks();
 	});
 
-	const premmisions = PermissionFlagsBits.SendMessages;
+	const permissions = PermissionFlagsBits.SendMessages;
 
 	it('should have the correct command data', () => {
 		expect(command.category).toBe('Util');
@@ -20,7 +20,7 @@ describe('Ping', () => {
 		expect(command.data.name).toBe('ping');
 		expect(command.needsVoiceChannel).toBe(false);
 		expect(command.data.default_member_permissions).toBe(
-			premmisions.toString(),
+			permissions.toString(),
 		);
 	});
 

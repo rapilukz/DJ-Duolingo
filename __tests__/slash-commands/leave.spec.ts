@@ -12,7 +12,7 @@ describe('Leave', () => {
 		vi.clearAllMocks();
 	});
 
-	const premmisions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
+	const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
 
 	it('should have the correct command data', () => {
 		expect(command.category).toBe('Music');
@@ -20,7 +20,7 @@ describe('Leave', () => {
 		expect(command.data.name).toBe('leave');
 		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(
-			premmisions.toString(),
+			permissions.toString(),
 		);
 	});
 
