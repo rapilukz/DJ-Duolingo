@@ -8,17 +8,18 @@ const mockVoiceChannel = {
 	name: 'General Voice',
 } as VoiceBasedChannel;
 
-const mockInteraction = {
-	reply: vi.fn(),
-	member: {},
-	guildId: '111111111',
-} as unknown as CommandInteraction;
 
 const mockMember = {
 	voice: {
 		channel: mockVoiceChannel,
 	},
 } as unknown as GuildMember;
+
+const mockInteraction = {
+	reply: vi.fn(),
+	member: mockMember,
+	guildId: '111111111',
+} as unknown as CommandInteraction;
 
 export interface MockQueueOptions {
 	playing?: boolean;

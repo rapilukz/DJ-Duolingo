@@ -49,35 +49,25 @@ describe('Resume', () => {
 	it('should resume the music if it is paused', async () => {
 		mockQueueOptions.paused = true;
 
-		const interaction = {
-			...mockInteraction,
-			member: mockMember,
-		} as CommandInteraction;
-
 		const mockQueue = createMockQueue(mockQueueOptions);
 
 		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
 
-		await command.run(interaction, client);
+		await command.run(mockInteraction, client);
 
 		expect(mockQueue.resume).toHaveBeenCalled();
-		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseSuccessEmbed('You hit the resume button, the music is now playing!')] });
+		expect(mockInteraction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseSuccessEmbed('You hit the resume button, the music is now playing!')] });
 	});
 
 	it('should not resume the music if it is already playing', async () => {
 		mockQueueOptions.playing = true;
 
-		const interaction = {
-			...mockInteraction,
-			member: mockMember,
-		} as CommandInteraction;
-
 		const mockQueue = createMockQueue(mockQueueOptions);
 		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
 
-		await command.run(interaction, client);
+		await command.run(mockInteraction, client);
 
 		expect(mockQueue.resume).not.toHaveBeenCalled();
-		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseErrorEmbed('The music is already playing!')] });
+		expect(mockInteraction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseErrorEmbed('The music is already playing!')] });
 	});
 });

@@ -1,8 +1,8 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
 import { command } from '@/slash-commands/Music/join';
-import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
-import { mockInteraction, mockMember, mockVoiceChannel } from '../mocks/discordMocks';
+import { PermissionFlagsBits } from 'discord.js';
+import { mockInteraction, mockVoiceChannel } from '../mocks/discordMocks';
 
 describe('Join', () => {
 	let client: ExtendedClient;
@@ -25,15 +25,10 @@ describe('Join', () => {
 	});
 
 	it('should join the voice channel', async () => {
-		const interaction = {
-			...mockInteraction,
-			member: mockMember,
-		} as CommandInteraction;
-
-		await command.run(interaction, client);
+		await command.run(mockInteraction, client);
 
 		expect(client.distube.voices.join).toHaveBeenCalledWith(mockVoiceChannel);
-		expect(interaction.reply).toHaveBeenCalledWith(
+		expect(mockInteraction.reply).toHaveBeenCalledWith(
 			`Joined the voice channel! ${mockVoiceChannel}`,
 		);
 	});
