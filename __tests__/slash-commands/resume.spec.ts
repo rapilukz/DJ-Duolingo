@@ -77,6 +77,7 @@ describe('Resume', () => {
 
 		await command.run(interaction, client);
 
+		expect(mockQueue.resume).not.toHaveBeenCalled();
 		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseErrorEmbed('The music is already playing!')] });
 	});
 });

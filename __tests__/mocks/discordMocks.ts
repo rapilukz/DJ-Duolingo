@@ -31,7 +31,12 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		playing: options.playing || false,
 		toggleAutoplay: vi.fn().mockReturnValue(options.toggleAutoplay || false),
 		resume: vi.fn(),
+		pause: vi.fn(),
 		paused: options.paused || false,
+		distube: {
+			pause: vi.fn(),
+			resume: vi.fn(),
+		},
 	} as unknown as Queue;
 }
 

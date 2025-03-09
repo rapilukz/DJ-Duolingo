@@ -1,9 +1,10 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
 import { command } from '@/slash-commands/Music/pause';
-import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
-import { mockInteraction, MockQueueOptions, mockMember, noMusicPlayingMockEmbed, createMockQueue } from '../mocks/discordMocks';
+import { Colors, CommandInteraction, PermissionFlagsBits } from 'discord.js';
+import { mockInteraction, MockQueueOptions, mockMember, createMockQueue, noMusicPlayingMockEmbed } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
+import { EmbedBuilder } from '@discordjs/builders';
 
 
 describe('Pause', () => {
@@ -15,7 +16,7 @@ describe('Pause', () => {
 		client = new ExtendedClient({ intents: [] });
 
 		mockQueueOptions = {
-			playing: true,
+			playing: false,
 			toggleAutoplay: false,
 			paused: false,
 		};
@@ -29,5 +30,62 @@ describe('Pause', () => {
 		expect(command.data.name).toBe('pause');
 		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(permissions.toString());
+	});
+
+	it('should not pause if there is no queue', async () => {
+		const interaction = {
+			...mockInteraction,
+			member: mockMember,
+		} as CommandInteraction;
+
+		client.distube.getQueue = vi.fn().mockReturnValue(null);
+
+		await command.run(interaction, client);
+
+		expect(utils.NoMusicPlayingEmbed).toHaveBeenCalled();
+		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [noMusicPlayingMockEmbed], ephemeral: true });
+	});
+
+	it('should not pause if the music is already paused', async () => {
+		mockQueueOptions.playing = false;
+		mockQueueOptions.paused = true;
+
+		const interaction = {
+			...mockInteraction,
+			member: mockMember,
+		} as CommandInteraction;
+
+		const mockQueue = createMockQueue(mockQueueOptions);
+
+		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
+
+		await command.run(interaction, client);
+
+		expect(utils.BaseErrorEmbed).toHaveBeenCalled();
+		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [utils.BaseErrorEmbed('The music is already paused!')] });
+		expect(mockQueue.distube.pause).not.toHaveBeenCalled();
+	});
+
+	it('should pause the music if it is playing', async () => {
+		mockQueueOptions.playing = true;
+
+		const interaction = {
+			...mockInteraction,
+			member: mockMember,
+		} as CommandInteraction;
+
+		const mockQueue = createMockQueue(mockQueueOptions);
+
+		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
+
+		await command.run(interaction, client);
+
+		const embed = new EmbedBuilder()
+			.setDescription('The music has been stopped!')
+			.setColor(Colors.Red);
+
+		expect(mockQueue.distube.pause).toBeCalledWith(interaction.guildId);
+		expect(interaction.reply).toHaveBeenCalledWith({ embeds: [embed] });
+
 	});
 });

@@ -10,6 +10,10 @@ vi.mock('discord.js', async () => {
 		Client: class {
 			on = vi.fn();
 			login = vi.fn().mockResolvedValue('mocked token');
+			distube = {
+				pause: vi.fn(),
+				resume: vi.fn(),
+			};
 		},
 		Collection: class {
 			set = vi.fn();
@@ -45,6 +49,10 @@ vi.mock('distube', async () => {
 			toggleAutoplay = vi.fn();
 			resume = vi.fn();
 			pause = vi.fn();
+			distube = {
+				pause: vi.fn(),
+				resume: vi.fn(),
+			};
 		},
 	};
 });
