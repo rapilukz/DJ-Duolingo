@@ -28,6 +28,9 @@ const mockInteraction = {
 			fetch: vi.fn(),
 		},
 	},
+	options : {
+		get: vi.fn(),
+	},
 } as unknown as CommandInteraction;
 
 export interface MockQueueOptions {
