@@ -40,6 +40,7 @@ vi.mock('distube', async () => {
 			getQueue = vi.fn();
 			stop = vi.fn();
 			jump = vi.fn();
+			shuffle = vi.fn();
 			voices = {
 				join: vi.fn(),
 				leave: vi.fn(),

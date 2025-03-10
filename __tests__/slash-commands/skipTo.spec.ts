@@ -5,7 +5,7 @@ import { PermissionFlagsBits, SlashCommandIntegerOption } from 'discord.js';
 import { mockInteraction, createMockQueue, MockQueueOptions, noMusicPlayingMockEmbed } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
-describe('Skip', () => {
+describe('Skip To', () => {
 	let client: ExtendedClient;
 	let mockQueueOptions: MockQueueOptions;
 
@@ -23,7 +23,6 @@ describe('Skip', () => {
 
 	it('should have the correct command data', () => {
 		const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
-		const option = command.data.options[0] as SlashCommandIntegerOption;
 
 		expect(command.category).toBe('Music');
 		expect(command.description).toBe('Skip to a specific song in the queue');
@@ -31,6 +30,8 @@ describe('Skip', () => {
 		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(permissions.toString());
 		expect(command.data.options).toHaveLength(1);
+
+		const option = command.data.options[0] as SlashCommandIntegerOption;
 		expect(option.name).toBe('position');
 		expect(option.description).toBe('The position of the song in the queue');
 		expect(option.required).toBe(true);
