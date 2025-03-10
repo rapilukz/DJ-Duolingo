@@ -47,6 +47,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 			pause: vi.fn(),
 			resume: vi.fn(),
 			stop: vi.fn(),
+			skip: vi.fn(),
 		},
 		songs: [
 			{
@@ -56,7 +57,13 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 					messageId: mockMessage.id,
 				},
 			},
-			{ name: 'Song 2', formattedDuration: '4:20' },
+			{
+				name: 'Song 2',
+				formattedDuration: '4:20',
+				metadata: {
+					messageId: '987654321',
+				},
+			},
 		],
 	} as unknown as Queue;
 }
