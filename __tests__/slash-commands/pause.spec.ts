@@ -10,7 +10,6 @@ import { EmbedBuilder } from '@discordjs/builders';
 describe('Pause', () => {
 	let client: ExtendedClient;
 	let mockQueueOptions: MockQueueOptions;
-	const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
 
 	beforeEach(() => {
 		client = new ExtendedClient({ intents: [] });
@@ -25,6 +24,8 @@ describe('Pause', () => {
 	});
 
 	it('should have the correct command data', () => {
+		const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
+
 		expect(command.category).toBe('Music');
 		expect(command.description).toBe('Pauses the player');
 		expect(command.data.name).toBe('pause');

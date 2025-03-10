@@ -17,6 +17,7 @@ export const command: SlashCommand = {
 		const queue = client.distube.getQueue(guildId);
 		if (!queue || !queue.playing) return NoMusicPlayingEmbed(interaction);
 
+		// TODO: extract this to a function in utils to test it better
 		const embed = new EmbedBuilder()
 			.setTitle('🎶 Current Queue')
 			.setDescription(queue.songs.map((song, i) => {

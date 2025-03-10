@@ -50,10 +50,13 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		},
 		songs: [
 			{
+				name: 'Song 1',
+				formattedDuration: '3:00',
 				metadata: {
 					messageId: mockMessage.id,
 				},
 			},
+			{ name: 'Song 2', formattedDuration: '4:20' },
 		],
 	} as unknown as Queue;
 }
