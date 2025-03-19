@@ -59,6 +59,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 				name: 'Song 1',
 				formattedDuration: '3:00',
 				duration: 180,
+				url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 				metadata: {
 					messageId: mockMessage.id,
 				},
@@ -67,6 +68,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 				name: 'Song 2',
 				formattedDuration: '4:20',
 				duration: 260,
+				url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 				metadata: {
 					messageId: '987654321',
 				},
