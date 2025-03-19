@@ -45,17 +45,20 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		toggleAutoplay: vi.fn().mockReturnValue(options.toggleAutoplay || false),
 		resume: vi.fn(),
 		pause: vi.fn(),
+		currentTime: 100,
 		paused: options.paused || false,
 		distube: {
 			pause: vi.fn(),
 			resume: vi.fn(),
 			stop: vi.fn(),
 			skip: vi.fn(),
+			seek: vi.fn(),
 		},
 		songs: [
 			{
 				name: 'Song 1',
 				formattedDuration: '3:00',
+				duration: 180,
 				metadata: {
 					messageId: mockMessage.id,
 				},
@@ -63,6 +66,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 			{
 				name: 'Song 2',
 				formattedDuration: '4:20',
+				duration: 260,
 				metadata: {
 					messageId: '987654321',
 				},
