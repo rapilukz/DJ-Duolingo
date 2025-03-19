@@ -12,7 +12,7 @@ export const command: SlashCommand = {
 		.setName('rewind')
 		.setDescription('Rewind forward the player by your specified amount of seconds. The default is 10 seconds.')
 		.addNumberOption(option => option.setName('seconds')
-			.setDescription('The amount of seconds to fast forward')
+			.setDescription('The amount of seconds to rewind')
 			.setRequired(false)
 			.setMinValue(0),
 		)

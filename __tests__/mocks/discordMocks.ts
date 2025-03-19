@@ -37,6 +37,7 @@ export interface MockQueueOptions {
 	playing?: boolean;
 	toggleAutoplay?: boolean;
 	paused?: boolean;
+	currentTime?: number;
 }
 
 function createMockQueue(options: MockQueueOptions) : Queue {
@@ -45,7 +46,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		toggleAutoplay: vi.fn().mockReturnValue(options.toggleAutoplay || false),
 		resume: vi.fn(),
 		pause: vi.fn(),
-		currentTime: 100,
+		currentTime: options.currentTime || 100,
 		paused: options.paused || false,
 		distube: {
 			pause: vi.fn(),
