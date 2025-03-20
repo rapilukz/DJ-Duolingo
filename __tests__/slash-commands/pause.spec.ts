@@ -19,8 +19,6 @@ describe('Pause', () => {
 			toggleAutoplay: false,
 			paused: false,
 		};
-
-		vi.clearAllMocks();
 	});
 
 	it('should have the correct command data', () => {

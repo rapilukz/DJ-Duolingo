@@ -1,29 +1,36 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
-import { command } from '@/slash-commands/Music/queue';
-import { Colors, PermissionFlagsBits } from 'discord.js';
+import { command } from '@/slash-commands/Music/replay';
+import { PermissionFlagsBits } from 'discord.js';
 import { mockInteraction, createMockQueue, MockQueueOptions, noMusicPlayingMockEmbed } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
-import { EmbedBuilder } from '@discordjs/builders';
 
-describe('Queue', () => {
+describe('Replay', () => {
 	let client: ExtendedClient;
+	let mockQueueOptions: MockQueueOptions;
 
 	beforeEach(() => {
 		client = new ExtendedClient({ intents: [] });
+
+		mockQueueOptions = {
+			playing: false,
+			toggleAutoplay: false,
+			paused: false,
+		};
 	});
 
 	it('should have the correct command data', () => {
 		const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;
 
 		expect(command.category).toBe('Music');
-		expect(command.description).toBe('See the current queue');
-		expect(command.data.name).toBe('queue');
+		expect(command.description).toBe('Replays the current song');
+		expect(command.data.name).toBe('replay');
 		expect(command.needsVoiceChannel).toBe(true);
 		expect(command.data.default_member_permissions).toBe(permissions.toString());
+		expect(command.data.options).toHaveLength(0);
 	});
 
-	it('should not show the queue if there is no queue', async () => {
+	it('should not rewind if there is no queue', async () => {
 		client.distube.getQueue = vi.fn().mockReturnValue(null);
 
 		await command.run(mockInteraction, client);
@@ -32,31 +39,18 @@ describe('Queue', () => {
 		expect(mockInteraction.reply).toHaveBeenCalledWith({ embeds: [noMusicPlayingMockEmbed], ephemeral: true });
 	});
 
-	it('should show the queue if there is a queue', async () => {
-		const mockQueueOptions: MockQueueOptions = {
-			playing: true,
-			toggleAutoplay: false,
-			paused: false,
-		};
+	it('should rewind the song', async () => {
+		mockQueueOptions.playing = true;
 
-		const mockQueue = createMockQueue(mockQueueOptions);
-
-		client.distube.getQueue = vi.fn().mockReturnValue(mockQueue);
+		const queue = createMockQueue(mockQueueOptions);
+		client.distube.getQueue = vi.fn().mockReturnValue(queue);
 
 		await command.run(mockInteraction, client);
+		const expectedSong = queue.songs[0];
 
-		const expectedDescription = mockQueue.songs.map((song, i) => {
-			return `${i === 0 ? '**Playing:**' : `${i}.`} ${song.name} - \`${song.formattedDuration}\``;
-		}).join('\n');
-
-		expect(mockInteraction.reply).toHaveBeenCalled();
+		expect(client.distube.seek).toHaveBeenCalledWith(mockInteraction.guildId, 0);
 		expect(mockInteraction.reply).toHaveBeenCalledWith({
-			embeds: [new EmbedBuilder()
-				.setTitle('🎶 Current Queue')
-				.setDescription(expectedDescription)
-				.setColor(Colors.Green)
-				.setTimestamp(),
-			],
+			embeds: [utils.BaseSuccessEmbed(`Replaying: [${expectedSong.name}](${expectedSong.url}) from the beginning`)],
 		});
 	});
 });

@@ -80,6 +80,7 @@ beforeEach(() => {
 
 	vi.useFakeTimers();
 	vi.setSystemTime(new Date('2022-01-01T00:00:00.000Z'));
+	vi.clearAllMocks();
 });
 
 afterEach(() => {

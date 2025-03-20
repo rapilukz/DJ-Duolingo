@@ -17,8 +17,6 @@ describe('Stop', () => {
 			toggleAutoplay: false,
 			paused: false,
 		};
-
-		vi.clearAllMocks();
 	});
 
 	const permissions = PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect;

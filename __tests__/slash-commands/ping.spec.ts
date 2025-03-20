@@ -1,4 +1,4 @@
-import { it, expect, describe, vi, beforeEach } from 'vitest';
+import { it, expect, describe, beforeEach } from 'vitest';
 import ExtendedClient from '@/client';
 import { command } from '@/slash-commands/Utils/ping';
 import { PermissionFlagsBits } from 'discord.js';
@@ -9,7 +9,6 @@ describe('Ping', () => {
 
 	beforeEach(() => {
 		client = new ExtendedClient({ intents: [] });
-		vi.clearAllMocks();
 	});
 
 	const permissions = PermissionFlagsBits.SendMessages;

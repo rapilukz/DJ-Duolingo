@@ -5,7 +5,7 @@ import { PermissionFlagsBits, SlashCommandIntegerOption } from 'discord.js';
 import { mockInteraction, createMockQueue, MockQueueOptions, noMusicPlayingMockEmbed } from '../mocks/discordMocks';
 import * as utils from '@/utils/functions';
 
-describe('Fast forward', () => {
+describe('Loop', () => {
 	let client: ExtendedClient;
 	let mockQueueOptions: MockQueueOptions;
 

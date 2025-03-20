@@ -18,8 +18,6 @@ describe('Shuffle', () => {
 			toggleAutoplay: false,
 			paused: false,
 		};
-
-		vi.clearAllMocks();
 	});
 
 	it('should have the correct command data', () => {
