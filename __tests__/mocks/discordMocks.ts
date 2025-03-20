@@ -54,6 +54,12 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 			stop: vi.fn(),
 			skip: vi.fn(),
 			seek: vi.fn(),
+			setRepeatMode: vi.fn(),
+		},
+		client : {
+			user: {
+				displayAvatarURL: vi.fn(),
+			},
 		},
 		songs: [
 			{

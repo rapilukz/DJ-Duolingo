@@ -1,8 +1,6 @@
 import { EmbedBuilder, Colors, CommandInteraction } from 'discord.js';
 import { vi, afterEach, beforeEach } from 'vitest';
 import { noMusicPlayingMockEmbed } from './discordMocks';
-import { Song } from 'distube';
-import { DisTubeMetadata } from '@/interfaces/Event';
 
 vi.mock('discord.js', async () => {
 	const actual = await vi.importActual<typeof import('discord.js')>('discord.js');
@@ -12,6 +10,9 @@ vi.mock('discord.js', async () => {
 		Client: class {
 			on = vi.fn();
 			login = vi.fn().mockResolvedValue('mocked token');
+			user = {
+				displayAvatarURL: vi.fn(),
+			};
 		},
 		Collection: class {
 			set = vi.fn();
@@ -42,20 +43,11 @@ vi.mock('distube', async () => {
 			jump = vi.fn();
 			shuffle = vi.fn();
 			seek = vi.fn();
+			setRepeatMode = vi.fn();
 			voices = {
 				join: vi.fn(),
 				leave: vi.fn(),
 			};
-		},
-		Queue: class {
-			toggleAutoplay = vi.fn();
-			resume = vi.fn();
-			pause = vi.fn();
-			distube = {
-				pause: vi.fn(),
-				resume: vi.fn(),
-			};
-			songs: Song<DisTubeMetadata>[] = [];
 		},
 	};
 });
