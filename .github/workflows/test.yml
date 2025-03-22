@@ -14,7 +14,8 @@ jobs:
     container:
       image: node:22
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       
       - name: Enable corepack
         run: corepack enable
