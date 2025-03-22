@@ -17,6 +17,7 @@ A feature-rich Discord music bot built with Discord.js and DisTube, providing se
 
 - Node.js (v22 or higher)
 - Discord.js v14
+- Pnpm (v9 or higher)
 - Discord Bot Token
 - FFmpeg installed on your system
 
@@ -49,15 +50,20 @@ A feature-rich Discord music bot built with Discord.js and DisTube, providing se
 
 ### Music Commands
 
-- `/play [song]`: Play a song or add it to the queue  
-- `/pause`: Pause the current song  
-- `/resume`: Resume playback  
-- `/skip`: Skip to the next song  
-- `/queue`: Display the current song queue  
 - `/autoplay`: Toggle autoplay mode on/off  
+- `/pause`: Pause the current song  
+- `/play [song]`: Play a song or add it to the queue  
+- `/resume`: Resume playback
+- `/replay`: Replay the current song
+- `/skip`: Skip to the next song  
+- `/skip-to`: Skips to a specific song in the queue
 - `/shuffle`: Shuffle the current queue  
 - `/stop`: Stop playback and clear the queue  
-- `/seek [position]`: Jump to a specific position in the current song  
+- `/seek [position]`: Jump to a specific position in the current song
+- `/queue`: Display the current song queue  
+- `/fast-forward`: Fast forward the current song by 10 seconds or a specified amount
+- `/rewind`: Rewind the current song by 10 seconds or a specified amount
+- `/loop`: Loop the current song or the entire queue
 
 ### Voice Channel Commands
 
