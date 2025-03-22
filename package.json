@@ -45,5 +45,11 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3",
     "vitest": "^3.0.7"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=9.15.0",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
   }
 }
