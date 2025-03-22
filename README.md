@@ -6,7 +6,7 @@ A feature-rich Discord music bot built with Discord.js and DisTube, providing se
 
 - **Music Playback**: Play music from YouTube, Spotify, and other supported platforms
 - **Queue Management**: Add, remove, and reorder songs in the queue
-- **Audio Controls**: Pause, resume, skip, and adjust volume
+- **Audio Controls**: Pause, resume and skip.
 - **Autoplay Mode**: Automatically play related tracks when the queue ends
 - **Voice Channel Integration**: Automatically joins your voice channel
 - **Slash Command Support**: Modern Discord slash command integration
