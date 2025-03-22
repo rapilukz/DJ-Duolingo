@@ -2,11 +2,12 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../client';
-import { BaseErrorEmbed, isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { BaseErrorEmbed, NoMusicPlayingEmbed } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'Fast forward the player by your specified amount of seconds. The default is 10 seconds.',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('fast-forward')
 		.setDescription('Fast forward the player by your specified amount of seconds. The default is 10 seconds.')
@@ -17,7 +18,6 @@ export const command: SlashCommand = {
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
-		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
 		const guildId = interaction.guildId as string;
 
 		const option = interaction.options?.get('seconds');

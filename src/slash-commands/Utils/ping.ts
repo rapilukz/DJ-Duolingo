@@ -4,7 +4,8 @@ import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 
 export const command: SlashCommand = {
 	category: 'Util',
-	description: 'Test Command',
+	description: 'Ping the bot',
+	needsVoiceChannel: false,
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Ping the bot')

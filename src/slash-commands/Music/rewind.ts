@@ -2,22 +2,22 @@ import { SlashCommand } from '../../interfaces';
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, PermissionFlagsBits } from 'discord.js';
 import ExtendedClient from '../../client';
-import { isVoiceChannel, NoMusicPlayingEmbed } from '../../utils/functions';
+import { NoMusicPlayingEmbed } from '../../utils/functions';
 
 export const command: SlashCommand = {
 	category: 'Music',
 	description: 'Rewind forward the player by your specified amount of seconds. The default is 10 seconds.',
+	needsVoiceChannel: true,
 	data: new SlashCommandBuilder()
 		.setName('rewind')
 		.setDescription('Rewind forward the player by your specified amount of seconds. The default is 10 seconds.')
 		.addNumberOption(option => option.setName('seconds')
-			.setDescription('The amount of seconds to fast forward')
+			.setDescription('The amount of seconds to rewind')
 			.setRequired(false)
 			.setMinValue(0),
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages | PermissionFlagsBits.Connect),
 	run: async (interaction: CommandInteraction, client: ExtendedClient) => {
-		if (!isVoiceChannel(interaction)) return interaction.reply('You need to be in a voice channel to use this command!');
 		const guildId = interaction.guildId as string;
 
 		const option = interaction.options?.get('seconds');

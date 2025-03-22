@@ -9,6 +9,7 @@ export interface Run {
 export interface SlashCommand {
   category: string;
   data: SlashCommandOptionsOnlyBuilder;
+  needsVoiceChannel: boolean;
   developer?: boolean;
   description: string;
   run: Run;
