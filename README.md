@@ -46,7 +46,7 @@ A feature-rich Discord music bot built with Discord.js and DisTube, providing se
     pnpm start ## This one runs the normal .env file
     pnpm start:dev ## This one runs the .env.dev file and slash commands are automatically loaded into dev guild
 
-## 🎮 Commands
+## 🎮 Commands 
 
 ### Music Commands
 
