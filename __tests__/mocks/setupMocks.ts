@@ -42,6 +42,7 @@ vi.mock('distube', async () => {
 			stop = vi.fn();
 			jump = vi.fn();
 			shuffle = vi.fn();
+			play = vi.fn();
 			seek = vi.fn();
 			setRepeatMode = vi.fn();
 			voices = {
@@ -69,6 +70,15 @@ vi.mock('../../src/utils/functions', async () => {
 		}),
 	};
 });
+
+vi.mock('../../src/utils/logger.ts', async () => ({
+	default: {
+		error: vi.fn(),
+		info: vi.fn(),
+		warn: vi.fn(),
+		debug: vi.fn(),
+	},
+}));
 
 beforeEach(() => {
 	vi.stubEnv('TOKEN', 'mocked token');

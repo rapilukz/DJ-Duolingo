@@ -31,6 +31,9 @@ const mockInteraction = {
 	options : {
 		get: vi.fn(),
 	},
+	guild: {
+		name: 'Mock Guild',
+	},
 } as unknown as CommandInteraction;
 
 export interface MockQueueOptions {
@@ -50,6 +53,7 @@ function createMockQueue(options: MockQueueOptions) : Queue {
 		paused: options.paused || false,
 		distube: {
 			pause: vi.fn(),
+			play: vi.fn(),
 			resume: vi.fn(),
 			stop: vi.fn(),
 			skip: vi.fn(),
