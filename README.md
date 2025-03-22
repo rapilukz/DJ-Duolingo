@@ -1,5 +1,5 @@
 # 🎧 DJ Duolingo
-
+[![Tests](https://github.com/rapilukz/DJ-Duolingo/actions/workflows/test.yml/badge.svg)](https://github.com/rapilukz/DJ-Duolingo/actions/workflows/test.yml)  
 A feature-rich Discord music bot built with Discord.js and DisTube, providing seamless music playback experience in your Discord server.
 
 ## 🎵 Features
