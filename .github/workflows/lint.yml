@@ -1,5 +1,4 @@
-name: Tests
-
+name: Lint
 on:
   push:
     branches:
@@ -9,7 +8,7 @@ on:
       - main
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     container:
       image: node:22-alpine
@@ -23,6 +22,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run lint
+        run: pnpm lint
 
