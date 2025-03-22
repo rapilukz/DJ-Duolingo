@@ -12,7 +12,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: node:22
+      image: node:22-alpine
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: node:22
+      image: node:22-alpine
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
