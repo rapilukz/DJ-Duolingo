@@ -1,4 +1,4 @@
-# DJ Duolingo
+# 🎧 DJ Duolingo
 
 A feature-rich Discord music bot built with Discord.js and DisTube, providing seamless music playback experience in your Discord server.
 
