@@ -11,8 +11,8 @@ export default defineConfig({
 		silent: true,
 		outputFile: 'coverage/junit.xml',
 		reporters: ['default', 'junit'],
-		setupFiles: ['./__tests__/mocks/setupMocks.ts'],
-		dir: path.resolve(__dirname, '__tests__'),
+		setupFiles: ['./tests/mocks/setupMocks.ts'],
+		dir: path.resolve(__dirname, 'tests'),
 	},
 
 	resolve: {
