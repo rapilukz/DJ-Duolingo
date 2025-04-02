@@ -21,12 +21,15 @@ const mockMember = {
 
 const mockInteraction = {
 	reply: vi.fn(),
+	deferReply: vi.fn(),
+	deleteReply: vi.fn(),
 	member: mockMember,
 	guildId: '111111111',
 	channel: {
 		messages: {
 			fetch: vi.fn(),
 		},
+		send: vi.fn(),
 	},
 	options : {
 		get: vi.fn(),
